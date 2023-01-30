@@ -66,16 +66,17 @@ class VerificationView: UIView {
         field.translatesAutoresizingMaskIntoConstraints = false
         field.separatorSpace = 8
         field.shouldAllowIntermediateEditing = true
-        field.fieldSize = 50
+        field.fieldSize = 50 * KeyWords.widthRatio
         field.displayType = .roundedCorner
         field.fieldFont = UIFont(font: .H1)
         field.backgroundColor = .backgroundColor
         field.defaultBackgroundColor = .cardColor
         field.filledBackgroundColor = .cardColor
-        field.fieldsCount = 6
+        field.fieldsCount = 5
         field.defaultBorderColor = .cardColor
         field.filledBorderColor = .cardColor
         field.requireCursor = false
+        field.isHidden = true
         field.initializeUI()
         return field
     }()
@@ -95,6 +96,7 @@ class VerificationView: UIView {
         setupConstraints()
         DispatchQueue.main.async {
             self.otpField.initializeUI()
+            self.otpField.isHidden = false
         }
     }
     
@@ -142,28 +144,29 @@ class VerificationView: UIView {
             cardView.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
             cardView.bottomAnchor.constraint(equalTo: confirmBtn.bottomAnchor, constant: 10),
             
-            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 40 * KeyWords.widthRatio),
+//            MARK: -Aslynda logo topAnchar constant 40 yone Navigation bar bolanson 20 etdim-
+            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 20 * KeyWords.widthRatio),
             logoImg.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 95),
             logoImg.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -95),
             
-            descLb.topAnchor.constraint(equalTo: logoImg.bottomAnchor, constant: 93),
+            descLb.topAnchor.constraint(equalTo: logoImg.bottomAnchor, constant: 93 * KeyWords.widthRatio),
             descLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             descLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
             
             phoneLb.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-            phoneLb.topAnchor.constraint(equalTo: descLb.bottomAnchor, constant: 25),
+            phoneLb.topAnchor.constraint(equalTo: descLb.bottomAnchor, constant: 25 * KeyWords.widthRatio),
             
-            otpField.topAnchor.constraint(equalTo: phoneLb.bottomAnchor, constant: 30),
-            otpField.heightAnchor.constraint(equalToConstant: 50),
+            otpField.topAnchor.constraint(equalTo: phoneLb.bottomAnchor, constant: 30 * KeyWords.widthRatio),
+            otpField.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             otpField.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
             otpField.widthAnchor.constraint(equalToConstant: 340),
             
             timerLb.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-            timerLb.topAnchor.constraint(equalTo: otpField.bottomAnchor, constant: 26),
+            timerLb.topAnchor.constraint(equalTo: otpField.bottomAnchor, constant: 20 * KeyWords.widthRatio),
             
             confirmBtn.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             confirmBtn.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
-            confirmBtn.topAnchor.constraint(equalTo: timerLb.bottomAnchor, constant: 20),
+            confirmBtn.topAnchor.constraint(equalTo: timerLb.bottomAnchor, constant: 20 * KeyWords.widthRatio),
             confirmBtn.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
         ])

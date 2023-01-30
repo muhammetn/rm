@@ -43,7 +43,7 @@ class LoginView: UIView {
     let prefixLb: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = UIFont(font: .B1Regular)
+        lb.font = UIFont(font: .B1Medium)
         lb.textColor = .passiveTextColor
         lb.text = "+993"
         return lb
@@ -52,8 +52,10 @@ class LoginView: UIView {
     let phoneField: CustomTextField = {
         let field = CustomTextField(padding: UIEdgeInsets(top: 16, left: 52 * KeyWords.widthRatio, bottom: 16, right: 16))
         field.translatesAutoresizingMaskIntoConstraints = false
+        field.isUserInteractionEnabled = true
         field.backgroundColor = .cardColor
         field.font = UIFont(font: .B1Regular)
+        field.keyboardType = .numberPad
         field.attributedPlaceholder = NSAttributedString(
             string: "65 65 64 63",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor]
@@ -89,7 +91,8 @@ class LoginView: UIView {
     let confirmBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .mainColor
+        btn.backgroundColor = .passiveTextColor
+        btn.isEnabled = false
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
@@ -158,7 +161,7 @@ class LoginView: UIView {
             cardView.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
             cardView.bottomAnchor.constraint(equalTo: confirmBtn.bottomAnchor, constant: 10),
             
-            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 60 * KeyWords.widthRatio),
+            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 40 * KeyWords.widthRatio),
             logoImg.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 95),
             logoImg.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -95),
             
@@ -184,7 +187,7 @@ class LoginView: UIView {
             confirmBtn.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             confirmBtn.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
-            bottomLogoImg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            bottomLogoImg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             bottomLogoImg.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }

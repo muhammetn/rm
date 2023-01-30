@@ -20,4 +20,14 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    func presentErrorAlert(title: String = "Error", msg: String = "") {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default)
+        alert.addAction(okAction)
+        let generator = UINotificationFeedbackGenerator()
+        present(alert, animated: true) {
+            generator.notificationOccurred(.error)
+        }
+    }
+    
 }

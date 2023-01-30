@@ -66,8 +66,9 @@ class NamingView: UIView {
         field.translatesAutoresizingMaskIntoConstraints = false
         field.attributedPlaceholder = NSAttributedString(
             string: "Mysal: Aman Amanow",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor]
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor, NSAttributedString.Key.font: UIFont(font: .B1Regular)]
         )
+        field.font = UIFont(font: .B1Regular)
         field.textColor = .white
         field.backgroundColor = .cardColor
         return field
@@ -122,26 +123,26 @@ class NamingView: UIView {
             cardView.topAnchor.constraint(equalTo: layoutGuide.topAnchor),
             cardView.bottomAnchor.constraint(equalTo: confirmBtn.bottomAnchor, constant: 10),
             
-            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 40 * KeyWords.widthRatio),
+            logoImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 20 * KeyWords.widthRatio),
             logoImg.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 95),
             logoImg.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -95),
             
-            titleLb.topAnchor.constraint(equalTo: logoImg.bottomAnchor, constant: 103),
+            titleLb.topAnchor.constraint(equalTo: logoImg.bottomAnchor, constant: 103 * KeyWords.widthRatio),
             titleLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             titleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
             
             descLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             descLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
-            descLb.topAnchor.constraint(equalTo: titleLb.bottomAnchor, constant: 15),
+            descLb.topAnchor.constraint(equalTo: titleLb.bottomAnchor, constant: 15 * KeyWords.widthRatio),
             
             nameField.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             nameField.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
-            nameField.topAnchor.constraint(equalTo: descLb.bottomAnchor, constant: 40),
+            nameField.topAnchor.constraint(equalTo: descLb.bottomAnchor, constant: 40 * KeyWords.widthRatio),
             nameField.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
             confirmBtn.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             confirmBtn.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
-            confirmBtn.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 66),
+            confirmBtn.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 66 * KeyWords.widthRatio),
             confirmBtn.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
         ])

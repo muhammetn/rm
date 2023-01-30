@@ -31,10 +31,12 @@ class CarSelectionView: UIView {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width-32, height: 224)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width-32, height: 224 * KeyWords.widthRatio)
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .backgroundColor
+        v.allowsSelection = true
+        v.allowsMultipleSelection = false
         v.register(CarSelectionCell.self, forCellWithReuseIdentifier: CarSelectionCell.identifier)
         return v
     }()
@@ -42,10 +44,12 @@ class CarSelectionView: UIView {
     let confirmBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .mainColor
+//        btn.backgroundColor = .mainColor
+        btn.backgroundColor = .passiveTextColor
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
+        btn.isEnabled = false
         btn.setTitle("Dowam et", for: .normal)
         return btn
     }()

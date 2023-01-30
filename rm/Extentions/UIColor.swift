@@ -16,7 +16,6 @@ enum Color: String {
     case passiveTextColor
     case redColor
     case strokeColor
-    case secondaryCardColor
     
 }
 
@@ -31,7 +30,7 @@ extension UIColor {
         return UIColor(named: Color.cardColor.rawValue) ?? .white
     }
     
-    @objc class var greenColor: UIColor {
+    @objc class var greenColorr: UIColor {
         return UIColor(named: Color.greenColor.rawValue) ?? .white
     }
     
@@ -43,7 +42,7 @@ extension UIColor {
         return UIColor(named: Color.passiveTextColor.rawValue) ?? .white
     }
     
-    @objc class var redColor: UIColor {
+    @objc class var redColorr: UIColor {
         return UIColor(named: Color.redColor.rawValue) ?? .white
     }
     
@@ -51,25 +50,21 @@ extension UIColor {
         return UIColor(named: Color.strokeColor.rawValue) ?? .white
     }
     
-    @objc class var secondaryCardColor: UIColor {
-        return UIColor(named: Color.secondaryCardColor.rawValue) ?? .white
+    
+    
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
-    
-    
-    
-//    convenience init(red: Int, green: Int, blue: Int) {
-//        assert(red >= 0 && red <= 255, "Invalid red component")
-//        assert(green >= 0 && green <= 255, "Invalid green component")
-//        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-//
-//        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-//    }
-//
-//    convenience init(rgb: Int) {
-//        self.init(
-//            red: (rgb >> 16) & 0xFF,
-//            green: (rgb >> 8) & 0xFF,
-//            blue: rgb & 0xFF
-//        )
-//    }
+
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
 }

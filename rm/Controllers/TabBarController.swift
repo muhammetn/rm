@@ -16,10 +16,11 @@ class TabBarController: UITabBarController {
     }
     
     func setupUI() {
-        UITabBar.appearance().shadowImage = UIImage.colorForNavBar(color: .redColor)
+        UITabBar.appearance().shadowImage = UIImage.colorForNavBar(color: .redColorr)
         tabBar.unselectedItemTintColor = .passiveTextColor
         tabBar.backgroundColor = .white
         tabBar.tintColor = .white
+        tabBar.barTintColor = .backgroundColor
         tabBar.backgroundColor = .cardColor
         updateTabBarItemFont()
     }
@@ -39,17 +40,18 @@ class TabBarController: UITabBarController {
                 tabBar.scrollEdgeAppearance = appearance
             } else { }
         } else {
+//            UITabBar.appearance().backgroundColor = .backgroundColor
             UITabBarItem.appearance().setTitleTextAttributes(normal, for: .normal)
             UITabBarItem.appearance().setTitleTextAttributes(selected, for: .selected)
         }
     }
     
     func setupVCs() {
-          viewControllers = [
-              createNavController(for: HomeVC(), title: "Home", image: UIImage(named: "home")!),
-              createNavController(for: ServicesVC(), title: "Service", image: UIImage(named: "Car")!)
-          ]
-      }
+        viewControllers = [
+            createNavController(for: HomeVC(), title: "Home", image: UIImage(named: "home")!),
+            createNavController(for: StatusVC(), title: "Service", image: UIImage(named: "Car")!)
+        ]
+    }
     
     fileprivate func createNavController(for rootViewController: UIViewController,
                                                     title: String,
@@ -63,21 +65,3 @@ class TabBarController: UITabBarController {
     
 }
 
-
-
-extension UIImage {
-    
-    class func colorForNavBar(color: UIColor) -> UIImage {
-        let rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return image!
-    }
-}

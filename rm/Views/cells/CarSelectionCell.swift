@@ -21,10 +21,21 @@ class CarSelectionCell: UICollectionViewCell {
     let carImageView: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "testImg")
+        img.backgroundColor = .clear
+//        img.image = UIImage(named: "image")
         img.contentMode = .scaleAspectFit
+        img.clipsToBounds = true
         return img
     }()
+    
+    override var isSelected: Bool {
+        willSet {
+            UIView.animate(withDuration: 0.2) { [self] in
+                backgroundColor = newValue ? UIColor.mainColor : UIColor.cardColor
+                titleLb.textColor = newValue ? UIColor.backgroundColor : UIColor.white
+            }
+        }
+    }
     
     static var identifier: String {
         return String(describing: self)
@@ -46,6 +57,11 @@ class CarSelectionCell: UICollectionViewCell {
         carImageView.layer.cornerRadius = 4
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        carImageView.image = nil
+    }
+    
     private func setupViews() {
         backgroundColor = .cardColor
         addSubview(titleLb)
@@ -60,9 +76,14 @@ class CarSelectionCell: UICollectionViewCell {
             
             carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             carImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            carImageView.topAnchor.constraint(equalTo: titleLb.bottomAnchor, constant: 10),
+            carImageView.topAnchor.constraint(equalTo: titleLb.bottomAnchor, constant: 15),
             carImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             
         ])
+    }
+    
+    func initData(_ car: Car) {
+        titleLb.text = car.getTitle()
+        carImageView.sdImageLoad(imgUrl: car.image)
     }
 }
