@@ -85,7 +85,6 @@ class ServiceDetailCell: UITableViewCell {
                 v.translatesAutoresizingMaskIntoConstraints = false
                 v.backgroundColor = .strokeColor
                 return v
-                
             }()
             nameLb.text = service.getTitle()
             cardView.addSubview(nameLb)
