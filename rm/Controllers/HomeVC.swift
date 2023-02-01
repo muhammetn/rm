@@ -31,6 +31,8 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let path = Bundle.main.path(forResource: "tk", ofType: "lproj")
+        AppLanguage.setAppleLanguageTo(lang: "ru")
         setupUI()
         bindViewModel()
     }
@@ -40,6 +42,13 @@ class HomeVC: UIViewController {
         view.backgroundColor = .backgroundColor
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        networkErrorView.callBack = { [weak self] in
+            guard let self = self else { return }
+            self.networkErrorView.isHidden = true
+            self.view.addSubview(self.loadingView)
+            self.loadingView.frame = self.view.bounds
+            self.viewModel.getWashers()
+        }
     }
     
     private func bindViewModel() {
@@ -54,10 +63,12 @@ class HomeVC: UIViewController {
         viewModel.didFinishWithError.bind { [weak self] error in
             guard let self = self, let error = error else { return }
             print("error \(error.customDescription)")
+            self.loadingView.removeFromSuperview()
             switch error {
-            case .networkError:
-                self.loadingView.removeFromSuperview()
+            case .noInternet:
+                self.networkErrorView.isHidden = false
                 self.view = self.networkErrorView
+                return 
             default:
                 self.presentErrorAlert(msg: error.customDescription)
             }
@@ -65,6 +76,7 @@ class HomeVC: UIViewController {
         
         viewModel.washers.bind { [weak self] washers in
             guard let self = self else { return }
+            self.view = self.mainView
             self.loadingView.removeFromSuperview()
             self.mainView.tableView.reloadData()
         }
@@ -79,9 +91,9 @@ extension HomeVC: UITableViewDelegate {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeader.identifier) as! TitleHeader
         switch section {
         case 0:
-            header.titleLb.text = "Тип машины:"
+            header.titleLb.text = "Тип машины:".localized()
         case 1:
-            header.titleLb.text = "VIP услуги"
+            header.titleLb.text = "VIP услуги".localized()
         default:
             header.titleLb.text = "Выберите мойщики"
         }

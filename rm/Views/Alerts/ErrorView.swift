@@ -9,6 +9,8 @@ import UIKit
 
 class NetworkErrorView: UIView {
     
+    var callBack: (()->())?
+    
     let imageView: UIImageView = {
         let img = UIImageView()
         img.tintColor = .passiveTextColor
@@ -74,6 +76,7 @@ class NetworkErrorView: UIView {
     }
     
     private func setupViews() {
+        backgroundColor = .backgroundColor
         addSubview(imageView)
         addSubview(stackView)
         addSubview(button)
@@ -83,6 +86,8 @@ class NetworkErrorView: UIView {
         titleLb.text = "Отсутствует интернет-соединение. "
         
         descLb.text = "Проверьте подключение к WI-FI или сотовой сети и повторите попытку."
+        
+        button.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -102,6 +107,10 @@ class NetworkErrorView: UIView {
             button.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
         ])
+    }
+    
+    @objc func clickBtn() {
+        callBack?()
     }
     
 }

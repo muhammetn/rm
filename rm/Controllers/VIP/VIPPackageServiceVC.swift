@@ -64,7 +64,7 @@ class VIPPackageServiceVC: UIViewController {
             print("error \(error.customDescription)")
             self.loadingView.removeFromSuperview()
             switch error {
-            case .networkError:
+            case .noInternet:
                 self.view = self.networkErrorView
             default:
                 self.presentErrorAlert(msg: error.customDescription)
@@ -85,29 +85,15 @@ class VIPPackageServiceVC: UIViewController {
     
     @objc func clickFooter() {
         if carModel == "" {
-            presentErrorAlert(title: "Warning", msg: "please enter car model!")
+            presentErrorAlert(title: "warning", msg: "please enter car model!")
             return
         }
         if carNumber == "" {
-            presentErrorAlert(title: "Warning", msg: "please enter car number!")
+            presentErrorAlert(title: "warning", msg: "please enter car number!")
             return
         }
         viewModel?.createOrder(carNo: carNumber, carType: carModel)
-//        let vc = Order
-//        show(vc, sender: self)
     }
-    
-//    @objc func adjuctForKeyboard(notification: Notification) {
-//        let userInfo = notification.userInfo!
-//        let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-//        let keyboardEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-//        if notification.name == UIResponder.keyboardWillHideNotification {
-//            mainView.tableView.contentInset = .zero
-//        } else {
-//            mainView.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardEndFrame.height - mainView.tableView.rowHeight, right: 0)
-//        }
-//        mainView.tableView.scrollIndicatorInsets = mainView.tableView.contentInset
-//    }
     
     @objc func carModelFieldDidChange(_ textField: UITextField) {
         carModel = textField.text ?? ""

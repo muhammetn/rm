@@ -38,10 +38,16 @@ class VIPServicesListVC: UIViewController {
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        networkErrorView.callBack = { [weak self] in
+            guard let self = self else { return }
+            self.networkErrorView.isHidden = true
+            self.view.addSubview(self.loadingView)
+            self.loadingView.frame = self.view.bounds
+            self.viewModel.getServices()
+        }
     }
     
     private func bindViewModel() {
-        
         viewModel.isLoading.bind { [weak self] isEnabled in
             guard let self = self else { return }
             if isEnabled {
@@ -55,7 +61,8 @@ class VIPServicesListVC: UIViewController {
             print("error \(error.customDescription)")
             self.loadingView.removeFromSuperview()
             switch error {
-            case .networkError:
+            case .noInternet:
+                self.networkErrorView.isHidden = false
                 self.view = self.networkErrorView
             default:
                 self.presentErrorAlert(msg: error.customDescription)
@@ -64,6 +71,7 @@ class VIPServicesListVC: UIViewController {
         
         viewModel.services.bind { [weak self] cars in
             guard let self = self else { return }
+            self.view = self.mainView
             self.loadingView.removeFromSuperview()
             self.mainView.tableView.reloadData()
         }

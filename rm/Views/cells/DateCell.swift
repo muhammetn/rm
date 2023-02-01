@@ -82,4 +82,9 @@ class DateCell: UICollectionViewCell {
         ])
     }
     
+    func initDate(day: String, month: String, dayName: String) {
+        dayLb.text = dayName
+        dateLb.text = "\(day) \(month)"
+    }
+    
 }

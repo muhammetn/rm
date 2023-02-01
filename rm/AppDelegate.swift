@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             window = UIWindow()
             window?.tintColor = .mainColor
-//            let vc = TabBarController()
-            let vc = UINavigationController(rootViewController: SelectedServicesListVC())
+            let vc = TabBarController()
+//            let vc = UINavigationController(rootViewController: SelectedServicesListVC())
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }

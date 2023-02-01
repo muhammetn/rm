@@ -103,10 +103,6 @@ class StatusCell: UITableViewCell {
         cardView.addSubview(statusBtn)
         cardView.addSubview(carImg)
         cardView.addSubview(carModelLb)
-        
-        carModelLb.text = "Camry • AY 8512"
-        descLb.text = "Перед вами 3 машины в очереди"
-        titleLB.text = "Полная мойка (кузов, салон)"
     }
     
     private func setupConstraints() {
@@ -155,6 +151,28 @@ class StatusCell: UITableViewCell {
             statusBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -15),
             
         ])
+    }
+    
+    func initDate(_ order: Order) {
+        carModelLb.text = "\(order.car_type ?? "") • \(order.car_no ?? "")"
+        titleLB.text = order.getTitle()
+        descLb.text = "service type: \(order.service_type ?? "")"
+        statusBtn.setTitle("\(order.status ?? "pending")", for: .normal)
+        switch order.status ?? "pending" {
+        case "pending":
+            statusImg.image = UIImage(named: "status_indicator-1")
+        case "received":
+            statusImg.image = UIImage(named: "status_indicator-2")
+        case "on_process":
+            statusImg.image = UIImage(named: "status_indicator-3")
+        case "completed":
+            statusImg.image = UIImage(named: "status_indicator-4")
+//            Canceled
+        default:
+            statusBtn.setTitleColor(.white, for: .normal)
+            statusBtn.backgroundColor = .redColorr
+            statusImg.image = UIImage(named: "status_indicator-5")
+        }
     }
     
 }

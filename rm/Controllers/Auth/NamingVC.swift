@@ -50,7 +50,7 @@ class NamingVC: UIViewController {
             print(error.customDescription)
             self.loadingView.removeFromSuperview()
             switch error {
-            case .networkError:
+            case .noInternet:
                 self.view = self.networkErrorView
             default:
                 self.presentErrorAlert(msg: error.customDescription)

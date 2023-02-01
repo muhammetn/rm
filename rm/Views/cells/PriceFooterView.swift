@@ -54,7 +54,6 @@ class PriceFooterView: UITableViewHeaderFooterView {
         cardView.layer.cornerRadius = 4
     }
     
-    
     private func setupViews() {
         contentView.backgroundColor = .backgroundColor
         contentView.addSubview(cardView)
@@ -65,20 +64,6 @@ class PriceFooterView: UITableViewHeaderFooterView {
         
         orderLb.text = "Заказать"
         priceLb.text = "Итоговая цена: 230 ТМТ"
-        
-//        let priceAttributes: [NSAttributedString.Key : Any] = [
-//            NSAttributedString.Key.font: UIFont(font: .S1Semibold),
-//            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
-//        ]
-//        
-//        let attributes: [NSAttributedString.Key : Any] = [
-//            NSAttributedString.Key.font: UIFont(font: .S1Regular),
-//            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
-//        ]
-//        
-//        let myString = NSMutableAttributedString(string: "Итоговая цена: 230 ТМТ", attributes: attributes)
-//        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: 7))
-//        priceLb.attributedText = myString
     }
     
     private func setupConstraints() {
@@ -127,7 +112,7 @@ class PriceFooterView: UITableViewHeaderFooterView {
             NSAttributedString.Key.font: UIFont(font: .S1Semibold),
             NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
         ]
-        let priceStr = "\(service) TMT"
+        let priceStr = "\(service.getPrice()) TMT"
         let myString = NSMutableAttributedString(string: "Итоговая цена: \(priceStr)", attributes: attributes)
         myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
         priceLb.attributedText = myString

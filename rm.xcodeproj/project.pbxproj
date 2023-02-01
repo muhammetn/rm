@@ -70,6 +70,10 @@
 		8A7EE3972981517900EFB0BA /* ServicePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7EE3962981517900EFB0BA /* ServicePackage.swift */; };
 		8A7EE399298171EB00EFB0BA /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7EE398298171EB00EFB0BA /* Identifiable.swift */; };
 		8A864CA52987CF80003C9E81 /* PackageServiceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A864CA42987CF80003C9E81 /* PackageServiceVM.swift */; };
+		8A864CA72987F455003C9E81 /* DatePickerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A864CA62987F455003C9E81 /* DatePickerVM.swift */; };
+		8A864CA929881630003C9E81 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A864CA829881630003C9E81 /* Time.swift */; };
+		8A864CAB29883308003C9E81 /* RemoveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A864CAA29883308003C9E81 /* RemoveView.swift */; };
+		8A864CAD29883A7E003C9E81 /* SelectedServicesListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A864CAC29883A7E003C9E81 /* SelectedServicesListVM.swift */; };
 		8A86DB982983D4FF002278E7 /* StatusDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86DB972983D4FF002278E7 /* StatusDetailVC.swift */; };
 		8A86DB9B2983D5EA002278E7 /* StatusDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86DB9A2983D5EA002278E7 /* StatusDetailView.swift */; };
 		8A86DB9D2983D79E002278E7 /* StatusDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86DB9C2983D79E002278E7 /* StatusDetailCell.swift */; };
@@ -100,6 +104,11 @@
 		8AA57C862975F287006FD7E6 /* CarSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57C852975F287006FD7E6 /* CarSelectionCell.swift */; };
 		8AA57C88297684FD006FD7E6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57C87297684FD006FD7E6 /* HomeView.swift */; };
 		8AA57C8A297689D3006FD7E6 /* WasherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA57C89297689D3006FD7E6 /* WasherCell.swift */; };
+		8AA7026F2989363200517DDD /* StatusVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA7026E2989363200517DDD /* StatusVM.swift */; };
+		8AA70271298937A200517DDD /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA70270298937A200517DDD /* Order.swift */; };
+		8AA7027329893AB700517DDD /* NoOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA7027229893AB700517DDD /* NoOrderView.swift */; };
+		8AA7027729894BE300517DDD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AA7027929894BE300517DDD /* Localizable.strings */; };
+		8AA7027E29898F0E00517DDD /* FooterReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA7027D29898F0E00517DDD /* FooterReviewView.swift */; };
 		8AEF159429852AD20002BD60 /* VIPPackageServiceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEF159329852AD20002BD60 /* VIPPackageServiceVM.swift */; };
 		8AEF1596298583120002BD60 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEF1595298583120002BD60 /* Date.swift */; };
 		8AF002F4298047CD00A02F9B /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF002F3298047CD00A02F9B /* AppLanguage.swift */; };
@@ -175,6 +184,10 @@
 		8A7EE3962981517900EFB0BA /* ServicePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackage.swift; sourceTree = "<group>"; };
 		8A7EE398298171EB00EFB0BA /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		8A864CA42987CF80003C9E81 /* PackageServiceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageServiceVM.swift; sourceTree = "<group>"; };
+		8A864CA62987F455003C9E81 /* DatePickerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVM.swift; sourceTree = "<group>"; };
+		8A864CA829881630003C9E81 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		8A864CAA29883308003C9E81 /* RemoveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveView.swift; sourceTree = "<group>"; };
+		8A864CAC29883A7E003C9E81 /* SelectedServicesListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedServicesListVM.swift; sourceTree = "<group>"; };
 		8A86DB972983D4FF002278E7 /* StatusDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDetailVC.swift; sourceTree = "<group>"; };
 		8A86DB9A2983D5EA002278E7 /* StatusDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDetailView.swift; sourceTree = "<group>"; };
 		8A86DB9C2983D79E002278E7 /* StatusDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDetailCell.swift; sourceTree = "<group>"; };
@@ -205,6 +218,15 @@
 		8AA57C852975F287006FD7E6 /* CarSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSelectionCell.swift; sourceTree = "<group>"; };
 		8AA57C87297684FD006FD7E6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8AA57C89297689D3006FD7E6 /* WasherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WasherCell.swift; sourceTree = "<group>"; };
+		8AA7026E2989363200517DDD /* StatusVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusVM.swift; sourceTree = "<group>"; };
+		8AA70270298937A200517DDD /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		8AA7027229893AB700517DDD /* NoOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOrderView.swift; sourceTree = "<group>"; };
+		8AA7027429894AFC00517DDD /* tk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tk; path = tk.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8AA7027829894BE300517DDD /* tk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tk; path = tk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA7027A29894BF600517DDD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8AA7027B29894C0000517DDD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA7027C29895BC200517DDD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA7027D29898F0E00517DDD /* FooterReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterReviewView.swift; sourceTree = "<group>"; };
 		8AEF159329852AD20002BD60 /* VIPPackageServiceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPackageServiceVM.swift; sourceTree = "<group>"; };
 		8AEF1595298583120002BD60 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		8AF002F3298047CD00A02F9B /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
@@ -319,6 +341,9 @@
 				8A7EE38C29811FE200EFB0BA /* HomeVM.swift */,
 				8A7EE3942981509500EFB0BA /* ServicesDetailVM.swift */,
 				8A864CA42987CF80003C9E81 /* PackageServiceVM.swift */,
+				8A864CA62987F455003C9E81 /* DatePickerVM.swift */,
+				8A864CAC29883A7E003C9E81 /* SelectedServicesListVM.swift */,
+				8AA7026E2989363200517DDD /* StatusVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -375,6 +400,8 @@
 				8A7CF6E82980261600E95D16 /* ErrorView.swift */,
 				8A9AE7B72979B5F700CAF3A1 /* SuccessView.swift */,
 				8AF002F52980541500A02F9B /* LoadingView.swift */,
+				8A864CAA29883308003C9E81 /* RemoveView.swift */,
+				8AA7027229893AB700517DDD /* NoOrderView.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -463,6 +490,8 @@
 				8A7EE3922981494200EFB0BA /* Service.swift */,
 				8A7EE3962981517900EFB0BA /* ServicePackage.swift */,
 				8A7EE398298171EB00EFB0BA /* Identifiable.swift */,
+				8A864CA829881630003C9E81 /* Time.swift */,
+				8AA70270298937A200517DDD /* Order.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -484,6 +513,7 @@
 				8A6280E52978308500F074B4 /* Helper.swift */,
 				8A7CF6D3297FF60200E95D16 /* AuthHelper.swift */,
 				8AF002F3298047CD00A02F9B /* AppLanguage.swift */,
+				8AA7027929894BE300517DDD /* Localizable.strings */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -520,6 +550,7 @@
 				8A86DB9C2983D79E002278E7 /* StatusDetailCell.swift */,
 				8A86DB9E2983D7F2002278E7 /* CarDetailCell.swift */,
 				8A86DBA02983D80D002278E7 /* ServiceDetailCell.swift */,
+				8AA7027D29898F0E00517DDD /* FooterReviewView.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -568,6 +599,8 @@
 			knownRegions = (
 				en,
 				Base,
+				tk,
+				ru,
 			);
 			mainGroup = 8A157A70297193C60004517F;
 			productRefGroup = 8A157A7A297193C60004517F /* Products */;
@@ -585,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AA57C5929754F29006FD7E6 /* TT Commons Medium.otf in Resources */,
+				8AA7027729894BE300517DDD /* Localizable.strings in Resources */,
 				8AA57C5D2975554D006FD7E6 /* TT Commons Regular.otf in Resources */,
 				8A157A89297193C80004517F /* LaunchScreen.storyboard in Resources */,
 				8AA57C5B29754F95006FD7E6 /* TT Commons DemiBold.otf in Resources */,
@@ -646,6 +680,7 @@
 				8A5F8D15297AB2B80031977C /* StatusView.swift in Sources */,
 				8A6280B72976D97C00F074B4 /* UIImage.swift in Sources */,
 				8A7CF6DA297FF82300E95D16 /* ErrorMessage.swift in Sources */,
+				8AA7027E29898F0E00517DDD /* FooterReviewView.swift in Sources */,
 				8A7EE3872981089900EFB0BA /* VerificationVM.swift in Sources */,
 				8A7CF6E5297FFF3500E95D16 /* CarSelectionVM.swift in Sources */,
 				8A7CF6D6297FF65400E95D16 /* Response.swift in Sources */,
@@ -676,6 +711,7 @@
 				8A7CF6EB2980309400E95D16 /* UIButton.swift in Sources */,
 				8A6280D92978012200F074B4 /* VIPPackageServiceView.swift in Sources */,
 				8AA57C862975F287006FD7E6 /* CarSelectionCell.swift in Sources */,
+				8A864CAD29883A7E003C9E81 /* SelectedServicesListVM.swift in Sources */,
 				8A7CF6E7297FFF8800E95D16 /* Binder.swift in Sources */,
 				8A7EE3932981494200EFB0BA /* Service.swift in Sources */,
 				8A864CA52987CF80003C9E81 /* PackageServiceVM.swift in Sources */,
@@ -688,6 +724,7 @@
 				8A6280C72977419100F074B4 /* VIPServicesListVC.swift in Sources */,
 				8AA57C732975A972006FD7E6 /* LoginView.swift in Sources */,
 				8A7EE38D29811FE200EFB0BA /* HomeVM.swift in Sources */,
+				8AA70271298937A200517DDD /* Order.swift in Sources */,
 				8AA57C5F297564AD006FD7E6 /* UIFont.swift in Sources */,
 				8A6280C52977411B00F074B4 /* VIPServicesListCell.swift in Sources */,
 				8A6280BD2976DC5400F074B4 /* ServiceSelectionHeader.swift in Sources */,
@@ -695,6 +732,7 @@
 				8A6280D12977E14700F074B4 /* PackageServiceInfoCell.swift in Sources */,
 				8A86DB9B2983D5EA002278E7 /* StatusDetailView.swift in Sources */,
 				8A7CF6D2297FF57500E95D16 /* NetworkErrors.swift in Sources */,
+				8A864CA72987F455003C9E81 /* DatePickerVM.swift in Sources */,
 				8A7EE385298072D800EFB0BA /* String.swift in Sources */,
 				8A6280D52977F98C00F074B4 /* TimeCheckCell.swift in Sources */,
 				8A6280C329772F2F00F074B4 /* CustomServiceCell.swift in Sources */,
@@ -712,10 +750,13 @@
 				8A9AE7BA2979CFED00CAF3A1 /* TransparentHoleView.swift in Sources */,
 				8A86DB982983D4FF002278E7 /* StatusDetailVC.swift in Sources */,
 				8A86DB9D2983D79E002278E7 /* StatusDetailCell.swift in Sources */,
+				8A864CA929881630003C9E81 /* Time.swift in Sources */,
 				8AF002F62980541500A02F9B /* LoadingView.swift in Sources */,
+				8AA7026F2989363200517DDD /* StatusVM.swift in Sources */,
 				8AA57C88297684FD006FD7E6 /* HomeView.swift in Sources */,
 				8A6280BF29771FE900F074B4 /* ServiceCell.swift in Sources */,
 				8A157A7F297193C60004517F /* SceneDelegate.swift in Sources */,
+				8AA7027329893AB700517DDD /* NoOrderView.swift in Sources */,
 				8AA57C6129757EFA006FD7E6 /* CustomTextField.swift in Sources */,
 				8AA57C812975EF1F006FD7E6 /* CarSelectionVC.swift in Sources */,
 				8A6280BB2976DAEE00F074B4 /* ServicesDetailView.swift in Sources */,
@@ -730,6 +771,7 @@
 				8A6280EA2979514000F074B4 /* DatePickerView.swift in Sources */,
 				8A7CF6E2297FF9D400E95D16 /* Car.swift in Sources */,
 				8A7CF6DC297FF8B400E95D16 /* ServicesDataProvider.swift in Sources */,
+				8A864CAB29883308003C9E81 /* RemoveView.swift in Sources */,
 				8AA57C7F2975EAC8006FD7E6 /* NaminvView.swift in Sources */,
 				8A6280E42978304A00F074B4 /* LoadingVC.swift in Sources */,
 				8A7EE3892981090B00EFB0BA /* User.swift in Sources */,
@@ -743,8 +785,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				8A157A88297193C80004517F /* Base */,
+				8AA7027429894AFC00517DDD /* tk */,
+				8AA7027A29894BF600517DDD /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8AA7027929894BE300517DDD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AA7027829894BE300517DDD /* tk */,
+				8AA7027B29894C0000517DDD /* ru */,
+				8AA7027C29895BC200517DDD /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -754,6 +808,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -814,6 +869,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

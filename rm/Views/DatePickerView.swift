@@ -121,21 +121,6 @@ class DatePickerView: UIView {
         footerView.addGestureRecognizer(rec)
         
         orderLb.text = "Заказать"
-        priceLb.text = "Итоговая цена: 230 ТМТ"
-        
-        let priceAttributes: [NSAttributedString.Key : Any] = [
-            NSAttributedString.Key.font: UIFont(font: .S1Semibold),
-            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
-        ]
-        
-        let attributes: [NSAttributedString.Key : Any] = [
-            NSAttributedString.Key.font: UIFont(font: .S1Regular),
-            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
-        ]
-        
-        let myString = NSMutableAttributedString(string: "Итоговая цена: 230 ТМТ", attributes: attributes)
-        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: 7))
-        priceLb.attributedText = myString
     }
     
     private func setupConstraints() {
@@ -174,6 +159,23 @@ class DatePickerView: UIView {
             priceLb.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -25),
             priceLb.centerYAnchor.constraint(equalTo: orderLb.centerYAnchor),
         ])
+    }
+    
+    func initPrice(price: Double) {
+        let priceAttributes: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.font: UIFont(font: .S1Semibold),
+            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
+        ]
+        
+        let attributes: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.font: UIFont(font: .S1Regular),
+            NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
+        ]
+        
+        let priceStr = "\(price) TMT"
+        let myString = NSMutableAttributedString(string: "Итоговая цена: \(priceStr)", attributes: attributes)
+        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
+        priceLb.attributedText = myString
     }
     
     @objc func clickFooter() {

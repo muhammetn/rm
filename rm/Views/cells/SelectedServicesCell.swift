@@ -10,6 +10,7 @@ import UIKit
 class SelectedServicesCell: UITableViewCell {
     
     var selectedCallback: (()->())?
+    var removeCallback: (()->())?
     
     static var identifier: String {
         return String(describing: self)
@@ -71,21 +72,28 @@ class SelectedServicesCell: UITableViewCell {
     
     private func setupViews() {
         backgroundColor = .backgroundColor
-        addSubview(cardView)
+        contentView.addSubview(cardView)
         cardView.addSubview(titleLb)
         cardView.addSubview(removeBtn)
         cardView.addSubview(lineView)
         cardView.addSubview(priceLb)
         let rec = UITapGestureRecognizer(target: self, action: #selector(clickCell))
         cardView.addGestureRecognizer(rec)
+        
+        removeBtn.addTarget(self, action: #selector(clickRem), for: .touchUpInside)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cardView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            cardView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             titleLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             titleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -50),
@@ -106,13 +114,19 @@ class SelectedServicesCell: UITableViewCell {
             priceLb.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16)
             
         ])
-        
-        priceLb.text = "123 TMT"
-        titleLb.text = "Химическая пена (Смягчающая)"
     }
     
-//    MARK: - Not working -
+    func initData(service: Service) {
+        priceLb.text = "\(service.getPrice()) TMT"
+        titleLb.text = "\(service.getTitle())"
+    }
+    
     @objc func clickCell() {
         selectedCallback?()
     }
+    
+    @objc func clickRem() {
+        removeCallback?()
+    }
+    
 }

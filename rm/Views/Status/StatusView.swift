@@ -14,6 +14,7 @@ class StatusView: UIView {
         tb.translatesAutoresizingMaskIntoConstraints = false
         tb.separatorStyle = .none
         tb.backgroundColor = .backgroundColor
+        tb.showsVerticalScrollIndicator = false
         tb.rowHeight  = UITableView.automaticDimension
         tb.estimatedRowHeight = 80
         tb.sectionHeaderHeight = 30

@@ -10,13 +10,13 @@ import UIKit
 class AppLanguage {
     // get current Apple language
     class func currentAppleLanguage() -> String {
-        _ = Locale.preferredLanguages[0]
-        var defLang = "ru"
+        let defLang = "ru"
         return UserDefaults.standard.string(forKey: "lang") ?? defLang
     }
     
     class func setAppleLanguageTo(lang: String) {
         UserDefaults.standard.set(lang, forKey: "lang")
         UserDefaults.standard.synchronize()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "LCLLanguageChangeNotification"), object: nil)
     }
 }

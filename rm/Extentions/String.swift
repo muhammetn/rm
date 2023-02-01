@@ -12,18 +12,32 @@ extension String {
         return components(separatedBy: .whitespaces).joined()
     }
     
-//    func dateToString(date: Date = Date()) -> String {
-//        let formatter = DateFormatter()
-////        2023-01-21 16:17
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        let myString = formatter.string(from: date)
-//        // convert your string to date
-//        let yourDate = formatter.date(from: myString)
-//        //then again set the date format which type of output you need
-//        formatter.dateFormat = "dd-MMM-yyyy"
-//        // again convert your date to string
-//        let myStringDate = formatter.string(from: yourDate!)
-//        print(myStringDate)
-//        return myStringDate
+    func toDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let date = dateFormatter.date(from: self)!
+        return date
+    }
+    
+//    func localized(bundle: Bundle = .main, tableName: String = "ru") -> String {
+//        if let path = bundle.path(forResource: AppLanguage.currentAppleLanguage(), ofType: "lproj"),
+//            let bundle = Bundle(path: path) {
+//            return bundle.localizedString(forKey: self, value: "**\(self)**", table: tableName)
+//        }
+//        else if let path = bundle.path(forResource: "Base", ofType: "lproj"),
+//            let bundle = Bundle(path: path) {
+//            return bundle.localizedString(forKey: self, value: nil, table: tableName)
+//        }
+//        return self
+////        let lang = UserDefaults.standard.string(forKey: "lang") ?? "ru"
+////        return NSLocalizedString(self, value: "***\(self)***", comment: "")
 //    }
+    
+    func localized() -> String {
+        let lang = AppLanguage.currentAppleLanguage()
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "**\(self)**", comment: "")
+    }
+    
 }

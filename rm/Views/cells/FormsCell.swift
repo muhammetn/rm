@@ -31,6 +31,7 @@ class FormsCell: UITableViewCell {
     
     let carModelField: CustomTextField = {
         let field = CustomTextField()
+        field.tag = 1
         field.translatesAutoresizingMaskIntoConstraints = false
         field.backgroundColor = .cardColor
         field.font = UIFont(font: .B1Regular)
@@ -44,6 +45,7 @@ class FormsCell: UITableViewCell {
     
     let carNumberField: CustomTextField = {
         let field = CustomTextField()
+        field.tag = 2
         field.translatesAutoresizingMaskIntoConstraints = false
         field.backgroundColor = .cardColor
         field.font = UIFont(font: .B1Regular)

@@ -40,7 +40,7 @@ class TimeCheckCell: UITableViewCell {
     let nowCheckBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage(named: "State=Passive"), for: .normal)
+        btn.setImage(UIImage(named: "State=Active"), for: .normal)
         btn.imageView?.contentMode = .scaleAspectFit
         return btn
     }()
@@ -63,6 +63,25 @@ class TimeCheckCell: UITableViewCell {
         return lb
     }()
     
+    var hiddenSelectionBtn1: UIButton = {
+        let btn = UIButton()
+        btn.tag = 1
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .clear
+        return btn
+    }()
+    
+    var hiddenSelectionBtn2: UIButton = {
+        let btn = UIButton()
+        btn.tag = 2
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .clear
+        return btn
+    }()
+    
+    var selectionDateCallback: (()->())?
+    var nowDateCallback: (()->())?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -84,7 +103,11 @@ class TimeCheckCell: UITableViewCell {
         cardView.addSubview(nowCheckBtn)
         cardView.addSubview(selectDateTitleLb)
         cardView.addSubview(nowTitleLb)
+        cardView.addSubview(hiddenSelectionBtn1)
+        cardView.addSubview(hiddenSelectionBtn2)
         
+        hiddenSelectionBtn1.addTarget(self, action: #selector(clickSelectionDate), for: .touchUpInside)
+        hiddenSelectionBtn2.addTarget(self, action: #selector(clickSelectionDate), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -99,7 +122,6 @@ class TimeCheckCell: UITableViewCell {
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cardView.topAnchor.constraint(equalTo: contentView.topAnchor),
             cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            cardView.heightAnchor.constraint(equalToConstant: 100),
             
             titleLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
             titleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
@@ -115,7 +137,6 @@ class TimeCheckCell: UITableViewCell {
             nowCheckBtn.heightAnchor.constraint(equalToConstant: 20 * KeyWords.widthRatio),
             nowCheckBtn.widthAnchor.constraint(equalToConstant: 20 * KeyWords.widthRatio),
             
-            
             selectDateTitleLb.leadingAnchor.constraint(equalTo: selectDateCheckBtn.trailingAnchor, constant: 10),
             selectDateTitleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
             selectDateTitleLb.centerYAnchor.constraint(equalTo: selectDateCheckBtn.centerYAnchor),
@@ -126,6 +147,29 @@ class TimeCheckCell: UITableViewCell {
             
             nowCheckBtn.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -40),
             
+            hiddenSelectionBtn1.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
+            hiddenSelectionBtn1.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            hiddenSelectionBtn1.topAnchor.constraint(equalTo: selectDateCheckBtn.topAnchor),
+            hiddenSelectionBtn1.heightAnchor.constraint(equalToConstant: 20 * KeyWords.widthRatio),
+            
+            hiddenSelectionBtn2.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
+            hiddenSelectionBtn2.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            hiddenSelectionBtn2.topAnchor.constraint(equalTo: nowCheckBtn.topAnchor),
+            hiddenSelectionBtn2.heightAnchor.constraint(equalToConstant: 20 * KeyWords.widthRatio),
+            
         ])
     }
+    
+    @objc func clickSelectionDate(_ button: UIButton) {
+        if button == hiddenSelectionBtn1 {
+            selectDateCheckBtn.setImage(UIImage(named: "State=Active"), for: .normal)
+            nowCheckBtn.setImage(UIImage(named: "State=Passive"), for: .normal)
+            selectionDateCallback?()
+        } else {
+            nowCheckBtn.setImage(UIImage(named: "State=Active"), for: .normal)
+            selectDateCheckBtn.setImage(UIImage(named: "State=Passive"), for: .normal)
+            nowDateCallback?()
+        }
+    }
+    
 }

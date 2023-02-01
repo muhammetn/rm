@@ -27,6 +27,12 @@ struct Service: Codable {
         let lang = AppLanguage.currentAppleLanguage()
         return lang == "ru" ? (description_ru ?? "") : (description ?? "")
     }
+    
+    func getPrice() -> Double {
+        let car = AuthHelper.shared.car ?? 1
+        return car == 1 ? (price ?? 0) : (price_big ?? 0)
+        
+    }
 }
 
 extension Service: Equatable {

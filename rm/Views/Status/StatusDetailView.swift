@@ -13,15 +13,13 @@ class StatusDetailView: UIView {
         let tb = UITableView()
         tb.translatesAutoresizingMaskIntoConstraints = false
         tb.separatorStyle = .none
-        tb.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         tb.backgroundColor = .backgroundColor
         tb.rowHeight  = UITableView.automaticDimension
         tb.showsVerticalScrollIndicator = false
-        tb.estimatedRowHeight = 80
-        tb.sectionHeaderHeight = 30
         tb.register(StatusDetailCell.self, forCellReuseIdentifier: StatusDetailCell.identifier)
         tb.register(CarDetailCell.self, forCellReuseIdentifier: CarDetailCell.identifier)
         tb.register(ServiceDetailCell.self, forCellReuseIdentifier: ServiceDetailCell.identifier)
+        tb.register(FooterReviewView.self, forHeaderFooterViewReuseIdentifier: FooterReviewView.identifier)
         if #available(iOS 15.0, *) {
             tb.sectionHeaderTopPadding = 0
         } else { }
@@ -48,7 +46,6 @@ class StatusDetailView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
         ])
     }
 }

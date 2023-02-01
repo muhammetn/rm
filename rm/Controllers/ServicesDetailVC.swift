@@ -14,12 +14,14 @@ enum State {
 
 class ServicesDetailVC: UIViewController {
     
-    let mainView = ServicesDetailView()
+    var selectedServices = [Service]()
     var state: State = .ownService
-    var viewModel: ServicesDetailVM?
+    
     lazy var loadingView = LoadingView()
     lazy var networkErrorView = NetworkErrorView()
-    var selectedServices = [Service]()
+    
+    let mainView = ServicesDetailView()
+    var viewModel: ServicesDetailVM?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -72,7 +74,7 @@ class ServicesDetailVC: UIViewController {
             print("error \(error.customDescription)")
             self.loadingView.removeFromSuperview()
             switch error {
-            case .networkError:
+            case .noInternet:
                 self.view = self.networkErrorView
             default:
                 self.presentErrorAlert(msg: error.customDescription)
@@ -100,7 +102,7 @@ extension ServicesDetailVC: UITableViewDelegate {
             guard let viewModel = viewModel else {
                 return
             }
-            let vc = PackageServiceVC(service: viewModel.servicePackages.value[indexPath.row])
+            let vc = PackageServiceVC(service: viewModel.servicePackages.value[indexPath.row], washer: viewModel.washer)
             show(vc, sender: self)
         }
     }
@@ -143,7 +145,17 @@ extension ServicesDetailVC: UITableViewDataSource {
             return nil
         default:
             let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: PriceFooterView.identifier) as! PriceFooterView
+            footer.cardView.backgroundColor = selectedServices.count == 0 ? .passiveTextColor : .mainColor
             footer.calculate(selectedServices)
+            footer.clickCallback = { [weak self] in
+                guard let services = self?.selectedServices, let washer = self?.viewModel?.washer else { return }
+                if services.count == 0 {
+                    self?.presentErrorAlert(title: "warning", msg: "please select packages!")
+                    return 
+                }
+                let vc = SelectedServicesListVC(services: services, washer: washer)
+                self?.show(vc, sender: self)
+            }
             return state == .ownService ? nil : footer
         }
     }
@@ -241,7 +253,7 @@ extension ServicesDetailVC: UITableViewDataSource {
                     UIView.performWithoutAnimation {
                         self.mainView.tableView.reloadSections(IndexSet(integer: 2), with: .none)
                     }
-                    print(self.selectedServices)
+//                    print(self.selectedServices)
                 }
                 return cell
             }

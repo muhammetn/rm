@@ -27,7 +27,7 @@ class APIDataProvider {
     public func request<Model: Codable>(url: String, method: HTTPMethod = .get, params: [String: Any]? = nil, withAuth: Bool = false, completion: @escaping(Result<Model, NetworkError>)->()) {
         
         if !isConnectedToInternet() {
-            completion(.failure(.noInternet))
+            return completion(.failure(.noInternet))
         }
         
         guard let url = URL(string: "\(BASE_URL)\(url)") else {
@@ -54,7 +54,7 @@ class APIDataProvider {
                 }
                 completion(.success(result))
             case .failure(_):
-                completion(.failure(.incorrectJson))
+                return completion(.failure(.incorrectJson))
 //                print(error.localizedDescription)
             }
         }
