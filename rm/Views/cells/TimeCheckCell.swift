@@ -23,7 +23,7 @@ class TimeCheckCell: UITableViewCell {
     let titleLb: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Когда вы хотите использовать?"
+        lb.text = "Когда вы хотите использовать?".localized()
         lb.textColor = .white
         lb.font = UIFont(font: .S1Semibold)
         return lb
@@ -50,7 +50,7 @@ class TimeCheckCell: UITableViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .B1Regular)
         lb.textColor = .white
-        lb.text = "Забронировать время"
+        lb.text = "Забронировать время".localized()
         return lb
     }()
     
@@ -59,7 +59,7 @@ class TimeCheckCell: UITableViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .B1Regular)
         lb.textColor = .white
-        lb.text = "Заехать сейчас"
+        lb.text = "Заехать сейчас".localized()
         return lb
     }()
     

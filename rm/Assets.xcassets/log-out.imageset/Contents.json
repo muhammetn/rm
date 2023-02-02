@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : " bubble-star.svg",
+      "filename" : " log-out.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -19,6 +19,8 @@
     "version" : 1
   },
   "properties" : {
+    "compression-type" : "lossy",
+    "preserves-vector-representation" : true,
     "template-rendering-intent" : "template"
   }
 }

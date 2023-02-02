@@ -31,8 +31,6 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let path = Bundle.main.path(forResource: "tk", ofType: "lproj")
-        AppLanguage.setAppleLanguageTo(lang: "ru")
         setupUI()
         bindViewModel()
     }
@@ -48,6 +46,13 @@ class HomeVC: UIViewController {
             self.view.addSubview(self.loadingView)
             self.loadingView.frame = self.view.bounds
             self.viewModel.getWashers()
+        }
+        mainView.profileCallback = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            let vc = ProfileVC()
+            self.show(vc, sender: self)
         }
     }
     
@@ -95,7 +100,7 @@ extension HomeVC: UITableViewDelegate {
         case 1:
             header.titleLb.text = "VIP услуги".localized()
         default:
-            header.titleLb.text = "Выберите мойщики"
+            header.titleLb.text = "Выберите мойщики".localized()
         }
         return header
     }

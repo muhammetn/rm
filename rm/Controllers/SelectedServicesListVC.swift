@@ -36,7 +36,9 @@ class SelectedServicesListVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "Выбранные услуги (\(viewModel?.services.count ?? 0) услуги)"
+        let selectedStr = "Выбранные услуги".localized()
+        let serviceStr = "услуги".localized()
+        title = "\(selectedStr) (\(viewModel?.services.count ?? 0) \(serviceStr))"
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.navigationBar.prefersLargeTitles = true
         mainView.tableView.delegate = self
@@ -92,11 +94,11 @@ class SelectedServicesListVC: UIViewController {
             return
         }
         if viewModel.carNo == "" {
-            presentErrorAlert(title: "warning", msg: "please enter car no!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car no!".localized())
             return
         }
         if viewModel.carModel == "" {
-            presentErrorAlert(title: "warning", msg: "please enter car no!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car no!".localized())
             return
         }
         if viewModel.timeSelection == .now {
@@ -188,7 +190,9 @@ extension SelectedServicesListVC: RemoveDelegate {
         if viewModel?.services.count == 0 {
             navigationController?.popViewController(animated: true)
         }
-        title = "Выбранные услуги (\(viewModel?.services.count ?? 0) услуги)"
+        let selectedStr = "Выбранные услуги".localized()
+        let serviceStr = "услуги".localized()
+        title = "\(selectedStr) (\(viewModel?.services.count ?? 0) \(serviceStr))"
     }
 }
 

@@ -22,7 +22,7 @@ final class VIPPackageServiceVM {
     
     func createOrder(carNo: String, carType: String) {
         self.didStartLoading.value = true
-        APIDataProvider.shared.createOrder(services: "\(service.service_id ?? 0)", car_model: AuthHelper.shared.car ?? -1, car_no: carNo, car_type: carType, is_booked: false, book_time: Date().toString(), washer_id: 0, washer_count: 0) { result in
+        APIDataProvider.shared.createOrder(services: "\(service.service_id ?? 0)", car_model: AuthHelper.shared.car ?? -1, car_no: carNo, car_type: carType, is_booked: false, book_time: Date().toString(), washer_id: 0, washer_count: service.min_washer ?? 0) { result in
             switch result {
             case .success(let success):
                 self.didStartLoading.value = false

@@ -9,6 +9,8 @@ import UIKit
 
 class HomeView: UIView {
     
+    var profileCallback: (()->())?
+    
     let topView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +29,7 @@ class HomeView: UIView {
     let userImageView: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "user-1")
+        img.isUserInteractionEnabled = true
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFit
         return img
@@ -62,6 +65,8 @@ class HomeView: UIView {
         addSubview(tableView)
         topView.addSubview(logoImageView)
         topView.addSubview(userImageView)
+        let userRec = UITapGestureRecognizer(target: self, action: #selector(clickUser))
+        userImageView.addGestureRecognizer(userRec)
     }
     
     private func setupConstraints() {
@@ -86,6 +91,10 @@ class HomeView: UIView {
             tableView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+    
+    @objc func clickUser() {
+        profileCallback?()
     }
     
 }

@@ -39,8 +39,9 @@ class SuccessView: UIView {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .H1)
         lb.textColor = .white
+        lb.numberOfLines = 0
         lb.textAlignment = .center
-        lb.text = "Ваш заказ отправлен!"
+        lb.text = "Ваш заказ отправлен!".localized()
         return lb
     }()
     
@@ -51,7 +52,7 @@ class SuccessView: UIView {
         lb.textColor = .passiveTextColor
         lb.textAlignment = .center
         lb.numberOfLines = 0
-        lb.text = "Ваш заказ отправлен администратору, пожалуйста, подождите, вы можете отслеживать статус заказа в разделе статуса"
+        lb.text = "Ваш заказ отправлен администратору, пожалуйста, подождите, вы можете отслеживать статус заказа в разделе статуса".localized()
         return lb
     }()
     
@@ -59,7 +60,7 @@ class SuccessView: UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .mainColor
-        btn.setTitle("Продолжить", for: .normal)
+        btn.setTitle("Продолжить".localized(), for: .normal)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
@@ -105,7 +106,8 @@ class SuccessView: UIView {
             iconImg.widthAnchor.constraint(equalToConstant: 62 * KeyWords.widthRatio),
             
             titleLb.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 66),
-            titleLb.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            titleLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 48),
+            titleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -48),
             
             descLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 24),
             descLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -24),

@@ -40,26 +40,15 @@ class RemoveAlertView: UIView {
         lb.font = UIFont(font: .H1)
         lb.textColor = .white
         lb.textAlignment = .center
-        lb.text = "Вы уверены, что хотите удалить?"
+        lb.text = "Вы уверены, что хотите удалить?".localized()
         return lb
     }()
-    
-//    let descLb: UILabel = {
-//        let lb = UILabel()
-//        lb.translatesAutoresizingMaskIntoConstraints = false
-//        lb.font = UIFont(font: .B1Regular)
-//        lb.textColor = .passiveTextColor
-//        lb.textAlignment = .center
-//        lb.numberOfLines = 0
-//        lb.text = "Ваш заказ отправлен администратору, пожалуйста, подождите, вы можете отслеживать статус заказа в разделе статуса"
-//        return lb
-//    }()
     
     let cancelBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white
-        btn.setTitle("Отменить", for: .normal)
+        btn.setTitle("Отменить".localized(), for: .normal)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
@@ -70,7 +59,7 @@ class RemoveAlertView: UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .redColorr
-        btn.setTitle("Да, удалить", for: .normal)
+        btn.setTitle("Да, удалить".localized(), for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.titleLabel?.font = UIFont(font: .S1Semibold)

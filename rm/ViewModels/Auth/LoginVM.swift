@@ -12,6 +12,7 @@ final class LoginVM {
     var isLoading: Binder<Bool> = Binder(false)
     var loadWithError: Binder<NetworkError?> = Binder(nil)
     var didStartVerification: Binder<String?> = Binder(nil)
+    var isChecked: Bool = false
     
     func startVer(phone: String) {
         isLoading.value = true

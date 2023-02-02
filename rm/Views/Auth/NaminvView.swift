@@ -47,7 +47,7 @@ class NamingView: UIView {
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
-        btn.setTitle("Dowam et", for: .normal)
+        btn.setTitle("Dowam et".localized(), for: .normal)
         return btn
     }()
     
@@ -65,7 +65,7 @@ class NamingView: UIView {
         let field = CustomTextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.attributedPlaceholder = NSAttributedString(
-            string: "Mysal: Aman Amanow",
+            string: "Mysal: Aman Amanow".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor, NSAttributedString.Key.font: UIFont(font: .B1Regular)]
         )
         field.font = UIFont(font: .B1Regular)
@@ -99,8 +99,8 @@ class NamingView: UIView {
         cardView.addSubview(descLb)
         cardView.addSubview(nameField)
         cardView.addSubview(confirmBtn)
-        titleLb.text = "Doly adyňyzy giriziň"
-        descLb.text = "Bellän adyňyz hyzmatlarymyzy ulanan wagtyňyz sargytlarda görkeziler"
+        titleLb.text = "Doly adyňyzy giriziň".localized()
+        descLb.text = "Bellän adyňyz hyzmatlarymyzy ulanan wagtyňyz sargytlarda görkeziler".localized()
         
     }
     

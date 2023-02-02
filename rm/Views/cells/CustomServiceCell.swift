@@ -114,14 +114,11 @@ class CustomServiceCell: UITableViewCell {
             priceLb.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16)
             
         ])
-        
-        priceLb.text = "123 TMT"
-        titleLb.text = "Мытье двигателя с химической пеной"
     }
     
     func initData(_ service: Service) {
         titleLb.text = service.getTitle()
-        priceLb.text = "\(service.price ?? 0) TMT"
+        priceLb.text = "\(service.getPrice()) TMT"
     }
     
     @objc func clickCell() {

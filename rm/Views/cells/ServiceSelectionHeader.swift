@@ -66,7 +66,7 @@ class ServiceSelectionHeader: UITableViewHeaderFooterView {
         lb.font = UIFont(font: .B1Medium)
         lb.textColor = .passiveTextColor
         lb.textAlignment = .center
-        lb.text = "Вид услуги"
+        lb.text = "Вид услуги".localized()
         return lb
     }()
     
@@ -76,7 +76,7 @@ class ServiceSelectionHeader: UITableViewHeaderFooterView {
         lb.font = UIFont(font: .B1Medium)
         lb.textColor = .passiveTextColor
         lb.textAlignment = .center
-        lb.text = "Выберите сами"
+        lb.text = "Выберите сами".localized()
         return lb
     }()
     

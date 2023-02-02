@@ -102,11 +102,13 @@ extension CarSelectionVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarSelectionCell.identifier, for: indexPath) as! CarSelectionCell
         let selected = AuthHelper.shared.car ?? -1
-        cell.initData(viewModel.result.value[indexPath.row])
         if selected == viewModel.result.value[indexPath.row].model_id ?? 0 {
             mainView.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
             mainView.confirmBtn.backgroundColor = .mainColor
             mainView.confirmBtn.isEnabled = true
+        }
+        DispatchQueue.main.async {
+            cell.initData(self.viewModel.result.value[indexPath.row])
         }
         return cell
     }

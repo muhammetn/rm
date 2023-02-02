@@ -62,7 +62,7 @@ class PriceFooterView: UITableViewHeaderFooterView {
         let rec = UITapGestureRecognizer(target: self, action: #selector(clickFooter))
         cardView.addGestureRecognizer(rec)
         
-        orderLb.text = "Заказать"
+        orderLb.text = "Заказать".localized()
         priceLb.text = "Итоговая цена: 230 ТМТ"
     }
     
@@ -85,7 +85,7 @@ class PriceFooterView: UITableViewHeaderFooterView {
     func calculate(_ services: [Service]) {
         var price = Double()
         services.forEach { service in
-            price += service.price ?? 0
+            price += service.getPrice()
         }
         let attributes: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.font: UIFont(font: .S1Regular),
@@ -97,8 +97,9 @@ class PriceFooterView: UITableViewHeaderFooterView {
             NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
         ]
         let priceStr = "\(price) TMT"
-        let myString = NSMutableAttributedString(string: "Итоговая цена: \(priceStr)", attributes: attributes)
-        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
+        let allPrice = "Итоговая цена:".localized()
+        let myString = NSMutableAttributedString(string: "\(allPrice) \(priceStr)", attributes: attributes)
+        myString.addAttributes(priceAttributes, range: NSRange(location: allPrice.count + 1, length: priceStr.count))
         priceLb.attributedText = myString
     }
     
@@ -113,8 +114,9 @@ class PriceFooterView: UITableViewHeaderFooterView {
             NSAttributedString.Key.foregroundColor: UIColor.backgroundColor
         ]
         let priceStr = "\(service.getPrice()) TMT"
-        let myString = NSMutableAttributedString(string: "Итоговая цена: \(priceStr)", attributes: attributes)
-        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
+        let allPrice = "Итоговая цена:".localized()
+        let myString = NSMutableAttributedString(string: "\(allPrice) \(priceStr)", attributes: attributes)
+        myString.addAttributes(priceAttributes, range: NSRange(location: allPrice.count + 1, length: priceStr.count))
         priceLb.attributedText = myString
     }
     

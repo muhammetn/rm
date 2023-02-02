@@ -40,7 +40,6 @@ class TabBarController: UITabBarController {
                 tabBar.scrollEdgeAppearance = appearance
             } else { }
         } else {
-//            UITabBar.appearance().backgroundColor = .backgroundColor
             UITabBarItem.appearance().setTitleTextAttributes(normal, for: .normal)
             UITabBarItem.appearance().setTitleTextAttributes(selected, for: .selected)
         }
@@ -48,8 +47,8 @@ class TabBarController: UITabBarController {
     
     func setupVCs() {
         viewControllers = [
-            createNavController(for: HomeVC(), title: "Home", image: UIImage(named: "home")!),
-            createNavController(for: StatusVC(), title: "Service", image: UIImage(named: "Car")!)
+            createNavController(for: HomeVC(), title: "Home".localized(), image: UIImage(named: "home")!),
+            createNavController(for: StatusVC(), title: "Service".localized(), image: UIImage(named: "Car")!)
         ]
     }
     

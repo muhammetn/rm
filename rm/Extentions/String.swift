@@ -19,6 +19,12 @@ extension String {
         return date
     }
     
+    func toDate(format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: self)!
+        return date
+    }
 //    func localized(bundle: Bundle = .main, tableName: String = "ru") -> String {
 //        if let path = bundle.path(forResource: AppLanguage.currentAppleLanguage(), ofType: "lproj"),
 //            let bundle = Bundle(path: path) {

@@ -22,7 +22,7 @@ class DatePickerView: UIView {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.textColor = .white
-        lb.text = "Выберите дату"
+        lb.text = "Выберите дату".localized()
         lb.font = UIFont(font: .S1Semibold)
         return lb
     }()
@@ -31,7 +31,7 @@ class DatePickerView: UIView {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.textColor = .white
-        lb.text = "Выберите время"
+        lb.text = "Выберите время".localized()
         lb.font = UIFont(font: .S1Semibold)
         return lb
     }()
@@ -120,7 +120,7 @@ class DatePickerView: UIView {
         let rec = UITapGestureRecognizer(target: self, action: #selector(clickFooter))
         footerView.addGestureRecognizer(rec)
         
-        orderLb.text = "Заказать"
+        orderLb.text = "Заказать".localized()
     }
     
     private func setupConstraints() {
@@ -173,7 +173,8 @@ class DatePickerView: UIView {
         ]
         
         let priceStr = "\(price) TMT"
-        let myString = NSMutableAttributedString(string: "Итоговая цена: \(priceStr)", attributes: attributes)
+        let allPriceStr = "Итоговая цена:".localized()
+        let myString = NSMutableAttributedString(string: "\(allPriceStr) \(priceStr)", attributes: attributes)
         myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
         priceLb.attributedText = myString
     }
@@ -188,10 +189,7 @@ class DatePickerView: UIView {
 class ColoredDatePicker: UIDatePicker {
     var changed = false
     override func addSubview(_ view: UIView) {
-//        if !changed {
-//            changed = true
-            self.setValue(UIColor.white, forKey: "textColor")
-//        }
-    super.addSubview(view)
+        self.setValue(UIColor.white, forKey: "textColor")
+        super.addSubview(view)
     }
 }

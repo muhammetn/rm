@@ -22,7 +22,6 @@ class CarSelectionCell: UICollectionViewCell {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         img.backgroundColor = .clear
-//        img.image = UIImage(named: "image")
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
         return img
@@ -66,7 +65,7 @@ class CarSelectionCell: UICollectionViewCell {
         backgroundColor = .cardColor
         addSubview(titleLb)
         addSubview(carImageView)
-        titleLb.text = "Седан • Хэтчбек • Универсал"
+        titleLb.text = "Седан • Хэтчбек • Универсал".localized()
     }
     
     private func setupConstraints() {
@@ -86,4 +85,5 @@ class CarSelectionCell: UICollectionViewCell {
         titleLb.text = car.getTitle()
         carImageView.sdImageLoad(imgUrl: car.image)
     }
+    
 }

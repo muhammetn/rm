@@ -53,6 +53,7 @@ class ServicesDetailVC: UIViewController {
     }
     
     private func setupUI() {
+        navigationItem.backButtonTitle = ""
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }
@@ -86,7 +87,6 @@ class ServicesDetailVC: UIViewController {
             if isFinished {
                 self.loadingView.removeFromSuperview()
                 self.mainView.tableView.reloadSections(IndexSet(integer: 2), with: .fade)
-                print("Finished")
             }
         }
         viewModel.getServices()
@@ -150,7 +150,7 @@ extension ServicesDetailVC: UITableViewDataSource {
             footer.clickCallback = { [weak self] in
                 guard let services = self?.selectedServices, let washer = self?.viewModel?.washer else { return }
                 if services.count == 0 {
-                    self?.presentErrorAlert(title: "warning", msg: "please select packages!")
+                    self?.presentErrorAlert(title: "warning".localized(), msg: "please select packages!".localized())
                     return 
                 }
                 let vc = SelectedServicesListVC(services: services, washer: washer)
@@ -166,7 +166,7 @@ extension ServicesDetailVC: UITableViewDataSource {
             return nil
         case 1:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TitleHeader.identifier) as! TitleHeader
-            header.titleLb.text = "Выберите услугу"
+            header.titleLb.text = "Выберите услугу".localized()
             return header
         default:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ServiceSelectionHeader.identifier) as! ServiceSelectionHeader
@@ -215,6 +215,7 @@ extension ServicesDetailVC: UITableViewDataSource {
         guard let viewModel = viewModel else {
             return UITableViewCell()
         }
+        
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: WasherCell.identifier, for: indexPath) as! WasherCell
             cell.homeLeading.constant = 0
@@ -253,7 +254,6 @@ extension ServicesDetailVC: UITableViewDataSource {
                     UIView.performWithoutAnimation {
                         self.mainView.tableView.reloadSections(IndexSet(integer: 2), with: .none)
                     }
-//                    print(self.selectedServices)
                 }
                 return cell
             }

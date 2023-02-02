@@ -21,19 +21,19 @@ enum NetworkError: Error {
     var customDescription: String {
         switch self {
         case .networkError:
-            return "networkError"
+            return "networkError".localized()
         case .noInternet:
-            return "noInternet"
+            return "noInternet".localized()
         case .involidUrl:
-            return "involidUrl"
+            return "involidUrl".localized()
         case .incorrectJson:
-            return "incorrectJson"
+            return "incorrectJson".localized()
         case .userExist:
-            return "userExist"
+            return "userExist".localized()
         case .unauthorized:
-            return "unauthorized"
+            return "unauthorized".localized()
         case .nullData:
-            return "nullData"
+            return "nullData".localized()
         case .customError(let error):
             return error
         }

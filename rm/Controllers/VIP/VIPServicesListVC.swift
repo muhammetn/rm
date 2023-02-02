@@ -31,9 +31,9 @@ class VIPServicesListVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "VIP услуги"
-        navigationItem.largeTitleDisplayMode = .always
+        title = "VIP услуги".localized()
         extendedLayoutIncludesOpaqueBars = true
+        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         
         mainView.tableView.delegate = self

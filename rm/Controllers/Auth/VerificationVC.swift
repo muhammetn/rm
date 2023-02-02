@@ -8,14 +8,22 @@
 import UIKit
 import OTPFieldView
 
+enum VerificationAction {
+    case sign
+    case changePhone
+}
+
 class VerificationVC: UIViewController {
     
     var phone = String()
     var code = String()
+    var action: VerificationAction = .sign
     let mainView = VerificationView()
     var viewModel = VerificationVM()
     lazy var loadingView = LoadingView()
     lazy var networkErrorView = NetworkErrorView()
+    var timer: Timer?
+    var count = 59
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -25,9 +33,10 @@ class VerificationVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(phone: String) {
+    convenience init(phone: String, action: VerificationAction) {
         self.init(nibName: nil, bundle: nil)
         self.phone = phone
+        self.action = action
     }
     
     override func loadView() {
@@ -42,17 +51,23 @@ class VerificationVC: UIViewController {
     }
     
     private func setupViews() {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         navigationItem.backButtonTitle = ""
         hideKeyboardWhenTappedAround()
         let font = [ NSAttributedString.Key.font: UIFont(font: .B1Medium), NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor ]
-        let attributed = NSMutableAttributedString(string: "+993 65 124225 belgili nomere ugradyldy", attributes: font)
-        let phoneRange = NSRange(location: 0, length: 14)
+        let phoneStr = "belgili nomere ugradyldy".localized()
+        let attributed = NSMutableAttributedString(string: "\(Helper.format(with: "+XXX XX XX XX XX", phone: phone)) \(phoneStr)", attributes: font)
+        let phoneRange = NSRange(location: 0, length: 17)
         attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.mainColor, range: phoneRange)
         mainView.phoneLb.attributedText = attributed
         NotificationCenter.default.addObserver(self, selector: #selector(self.adjuctForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.adjuctForKeyboard(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         mainView.otpField.delegate = self
         mainView.confirmBtn.addTarget(self, action: #selector(clickConfirm), for: .touchUpInside)
+        mainView.resendCallback = { [weak self] in
+            guard let self = self else { return }
+            self.clickResend()
+        }
     }
     
     private func bindViewModel() {
@@ -95,6 +110,20 @@ class VerificationVC: UIViewController {
                 self.show(vc, sender: self)
             }
         }
+        
+        viewModel.didChangePhone.bind { [weak self] didChanged in
+            guard let self = self else {
+                return
+            }
+            if didChanged {
+                guard let vc = Helper.getAlert(SuccessVC()) as? SuccessVC else { return }
+                vc.mainView.titleLb.text = "Ваш номер телефона успешно изменен".localized()
+                vc.mainView.descLb.text = ""
+                self.present(vc, animated: true) {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+        }
     }
     
     @objc func adjuctForKeyboard(notification: Notification) {
@@ -110,15 +139,39 @@ class VerificationVC: UIViewController {
     }
     
     @objc func clickConfirm() {
-        viewModel.signUser(phone: phone, code: code)
-//        let vc = NamingVC()
-//        show(vc, sender: self)
+        if action == .sign {
+            viewModel.signUser(phone: phone, code: code)
+        } else {
+            viewModel.changePhone(phone: phone, code: code)
+        }
+    }
+    
+    @objc func fireTimer() {
+        count -= 1
+        mainView.timerLb.text = "00:\(String(format: "%02d", count))"
+        if count == 0 {
+            timer?.invalidate()
+            timer = nil
+            mainView.timerLb.text = "Resend".localized()
+            mainView.timerLb.textColor = .white
+            mainView.timerLb.isUserInteractionEnabled = true
+        } else {
+            mainView.timerLb.textColor = .passiveTextColor
+            mainView.timerLb.isUserInteractionEnabled = false
+        }
+    }
+    
+    @objc func clickResend() {
+        count = 60
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        viewModel.startVer(phone: phone)
     }
     
 }
 
 
 extension VerificationVC: OTPFieldViewDelegate {
+    
     func shouldBecomeFirstResponderForOTP(otpTextFieldIndex index: Int) -> Bool {
         return true
     }
@@ -132,6 +185,5 @@ extension VerificationVC: OTPFieldViewDelegate {
         mainView.confirmBtn.backgroundColor = hasEnteredAll ? .mainColor : .passiveTextColor
         return hasEnteredAll
     }
-    
     
 }

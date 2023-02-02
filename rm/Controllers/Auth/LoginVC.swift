@@ -30,9 +30,13 @@ class LoginVC: UIViewController {
         hideKeyboardWhenTappedAround()
         NotificationCenter.default.addObserver(self, selector: #selector(self.adjuctForKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.adjuctForKeyboard(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-//        mainView.phoneField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         mainView.phoneField.delegate = self
         mainView.confirmBtn.addTarget(self, action: #selector(clickConfirm), for: .touchUpInside)
+        mainView.checkCallback = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.isChecked = self.mainView.hiddenCheckBtn.isSelected
+            self.mainView.checkImg.image = self.mainView.hiddenCheckBtn.isSelected ? UIImage(named: "State=Active") : UIImage(named: "State=Passive")
+        }
     }
     
     func bindViewModel() {
@@ -61,9 +65,8 @@ class LoginVC: UIViewController {
                 return
             }
             self.loadingView.removeFromSuperview()
-            let vc = VerificationVC(phone: phone)
+            let vc = VerificationVC(phone: phone, action: .sign)
             self.show(vc, sender: self)
-//            print("success: \(success)")
         }
     }
     
@@ -80,15 +83,12 @@ class LoginVC: UIViewController {
     }
     
     @objc func clickConfirm() {
+        if !viewModel.isChecked {
+            presentErrorAlert(title: "warning".localized(), msg: "please check usage!".localized())
+            return
+        }
         viewModel.startVer(phone: mainView.phoneField.text ?? "")
-//        let vc = VerificationVC()
-//        show(vc, sender: self)
     }
-    
-//    @objc private func textFieldDidChange(_ textField: UITextField) {
-//        guard let text = textField.text else { return }
-//        print(text)
-//    }
     
 }
 

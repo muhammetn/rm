@@ -24,7 +24,7 @@ class StatusDetailCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .S1Semibold)
-        lb.text = "ASDs"
+        lb.text = "Custom service".localized()
         lb.textColor = .white
         return lb
     }()
@@ -115,6 +115,7 @@ class StatusDetailCell: UITableViewCell {
     
     let statusImg: UIImageView = {
         let img = UIImageView()
+        img.tintColor = .mainColor
         img.translatesAutoresizingMaskIntoConstraints = false
         img.image = UIImage(named: "statusDetailStatus1")
         img.contentMode = .scaleAspectFit
@@ -209,14 +210,9 @@ class StatusDetailCell: UITableViewCell {
         cardView.addSubview(completedImg)
         cardView.addSubview(completedLb)
         
-        priceLb.text = "75 TMT"
-        timeLb.text = "30.12.2022 | 18:21"
-        personLb.text = "3 человек"
-        carLb.text = "Седан • Хэтчбек • Универсал"
-        
-        acceptedLb.text = "Принять"
-        onProcessLb.text = "В процессе"
-        completedLb.text = "Завершён"
+        acceptedLb.text = "Принять".localized()
+        onProcessLb.text = "В процессе".localized()
+        completedLb.text = "Завершён".localized()
     }
     
     private func setupConstraints() {
@@ -305,6 +301,63 @@ class StatusDetailCell: UITableViewCell {
             completedLb.centerYAnchor.constraint(equalTo: completedImg.centerYAnchor),
             
         ])
+    }
+    
+    func initData(order: Order) {
+        let date = (order.created_at ?? "").prefix(10)
+//        let time = order.created_at ?? ""
+        let dateStr = String(date).toDate(format: "yyyy-MM-dd").toString(dateFormat: "dd.MM.yyyy")
+        let washer = "человек".localized()
+        priceLb.text = "\(order.total ?? 0) TMT"
+        timeLb.text = "\(dateStr)"
+        personLb.text = "\(order.washer_count ?? 0) \(washer)"
+        carLb.text = "\(order.getCarModel())"
+        switch order.status ?? "pending" {
+        case "pending":
+            statusImg.image = UIImage(named: "statusDetailStatus1")
+            acceptedLb.textColor = .passiveTextColor
+            acceptedImg.tintColor = .passiveTextColor
+            onProcessLb.textColor = .passiveTextColor
+            onProcessImg.tintColor = .passiveTextColor
+            completedLb.textColor = .passiveTextColor
+            completedImg.tintColor = .passiveTextColor
+        case "receive":
+            statusImg.image = UIImage(named: "statusDetailStatus1")
+            acceptedLb.textColor = .white
+            acceptedImg.tintColor = .white
+            onProcessLb.textColor = .passiveTextColor
+            onProcessImg.tintColor = .passiveTextColor
+            completedLb.textColor = .passiveTextColor
+            completedImg.tintColor = .passiveTextColor
+        case "on_process":
+            statusImg.image = UIImage(named: "statusDetailStatus2")
+            acceptedLb.textColor = .white
+            acceptedImg.tintColor = .white
+            onProcessLb.textColor = .white
+            onProcessImg.tintColor = .white
+            completedLb.textColor = .passiveTextColor
+            completedImg.tintColor = .passiveTextColor
+        case "completed":
+            statusImg.image = UIImage(named: "statusDetailStatus3")
+            acceptedLb.textColor = .white
+            acceptedImg.tintColor = .white
+            onProcessLb.textColor = .white
+            onProcessImg.tintColor = .white
+            completedLb.textColor = .white
+            completedImg.tintColor = .white
+        case "canceled":
+            statusImg.image = UIImage(named: "statusDetailStatus3")
+            acceptedLb.textColor = .white
+            acceptedImg.tintColor = .white
+            onProcessLb.textColor = .white
+            onProcessImg.tintColor = .white
+            completedLb.textColor = .white
+            completedImg.tintColor = .redColorr
+            completedLb.text = "Oтменен".localized()
+            completedImg.image = UIImage(named: "Canceled")
+        default:
+            break
+        }
     }
     
 }

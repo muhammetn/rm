@@ -68,7 +68,10 @@ class PackageServiceVC: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.didStartLoading.bind { [weak self] isEnabled in
+        guard let viewModel = viewModel else {
+            return
+        }
+        viewModel.didStartLoading.bind { [weak self] isEnabled in
             guard let self = self else { return }
             if isEnabled {
                 self.view.addSubview(self.loadingView)
@@ -76,7 +79,7 @@ class PackageServiceVC: UIViewController {
             }
         }
         
-        viewModel?.didFinishWithError.bind { [weak self] error in
+        viewModel.didFinishWithError.bind { [weak self] error in
             guard let self = self, let error = error else { return }
             print("error \(error.customDescription)")
             self.loadingView.removeFromSuperview()
@@ -87,14 +90,15 @@ class PackageServiceVC: UIViewController {
                 self.presentErrorAlert(msg: error.customDescription)
             }
         }
-        viewModel?.didFinish.bind({ [weak self] value in
+        viewModel.didFinish.bind({ [weak self] value in
             guard let self = self else { return }
             if value {
-                print("success")
                 self.loadingView.removeFromSuperview()
                 let vc = Helper.getAlert(SuccessVC())
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.present(vc, animated: true)
+                    self.present(vc, animated: true) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
             }
         })
@@ -104,11 +108,11 @@ class PackageServiceVC: UIViewController {
     @objc func clickFooter() {
         guard let viewModel = viewModel else { return }
         if viewModel.carModel.count < 3 {
-            presentErrorAlert(title: "warning", msg: "please enter car model!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car model!".localized())
             return
         }
         if viewModel.carNo.count < 1 {
-            presentErrorAlert(title: "warning", msg: "please enter car no!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car no!".localized())
             return
         }
         if viewModel.timeSelection == .now {
@@ -152,7 +156,7 @@ extension PackageServiceVC: UITableViewDataSource, UITableViewDelegate {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: PackageServiceInfoCell.identifier, for: indexPath) as! PackageServiceInfoCell
             cell.icon1Img.image = UIImage(named: "user")
-            cell.title1Lb.text = "Минимум 1 мойщик"
+            cell.title1Lb.text = "Минимум 1 мойщик".localized()
             cell.selectionStyle = .none
             cell.activateIconBottom()
             return cell

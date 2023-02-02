@@ -26,6 +26,7 @@ class StatusVC: UIViewController {
         viewModel?.doneOrders.removeAll()
         viewModel?.onProcess.removeAll()
         mainView.tableView.reloadData()
+        viewModel?.load = true
         page = 1
         viewModel?.getOrders(page: self.page)
     }
@@ -37,7 +38,8 @@ class StatusVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "Статусы"
+        title = "Статусы".localized()
+        navigationItem.backButtonTitle = ""
         navigationItem.largeTitleDisplayMode = .always
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -67,13 +69,13 @@ class StatusVC: UIViewController {
         
         viewModel.didFinish.bind { [weak self] orders in
             guard let self = self, let orders = orders else { return }
+            self.loadingView.removeFromSuperview()
             if self.page == 1 && orders.count == 0 {
                 self.view = self.noOrderView
                 self.noOrderView.frame = self.view.bounds
                 return
             }
             self.view = self.mainView
-            self.loadingView.removeFromSuperview()
             orders.forEach({
                 guard let viewModel = self.viewModel  else { return }
                 let cnt1 = viewModel.onProcess.count
@@ -103,8 +105,15 @@ class StatusVC: UIViewController {
 extension StatusVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = StatusDetailVC()
-        show(vc, sender: self)
+        if indexPath.section == 0 {
+            guard let orderId = viewModel?.onProcess[indexPath.row].order_id else { return }
+            let vc = StatusDetailVC(orderId)
+            show(vc, sender: self)
+        } else {
+            guard let orderId = viewModel?.doneOrders[indexPath.row].order_id else { return }
+            let vc = StatusDetailVC(orderId)
+            show(vc, sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -112,7 +121,7 @@ extension StatusVC: UITableViewDelegate {
         header.titleLeading.isActive = false
         header.titleCenterY.isActive = true
         header.titleCenterY.constant = 0
-        header.titleLb.text = section == 0 ? "Активны" : "Выполнены"
+        header.titleLb.text = section == 0 ? "Активны".localized() : "Выполнены".localized()
         return header
     }
 

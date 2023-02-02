@@ -10,6 +10,8 @@ import OTPFieldView
 
 class VerificationView: UIView {
     
+    var resendCallback: (()->())?
+    
     var scrollView: UIScrollView = {
         let v = UIScrollView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +50,7 @@ class VerificationView: UIView {
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
-        btn.setTitle("Dowam et", for: .normal)
+        btn.setTitle("Dowam et".localized(), for: .normal)
         return btn
     }()
     
@@ -57,7 +59,7 @@ class VerificationView: UIView {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .B1Medium)
         lb.textColor = .white
-        lb.text = "+993 65 124225 belgili nomere ugradyldy"
+//        lb.text = "+993 65 124225 belgili nomere ugradyldy"
         return lb
     }()
     
@@ -120,9 +122,10 @@ class VerificationView: UIView {
         cardView.addSubview(otpField)
         cardView.addSubview(timerLb)
         cardView.addSubview(confirmBtn)
-        descLb.text = "Telefon belgiňize ugradylan tassyklaýjy kody belläň"
+        descLb.text = "Telefon belgiňize ugradylan tassyklaýjy kody belläň".localized()
         timerLb.text = "00:59"
-        
+        let rec = UITapGestureRecognizer(target: self, action: #selector(clickResend))
+        timerLb.addGestureRecognizer(rec)
     }
     
     private func setupConstraints() {
@@ -170,6 +173,10 @@ class VerificationView: UIView {
             confirmBtn.heightAnchor.constraint(equalToConstant: 50 * KeyWords.widthRatio),
             
         ])
+    }
+    
+    @objc func clickResend() {
+        resendCallback?()
     }
     
 }

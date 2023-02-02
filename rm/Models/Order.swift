@@ -18,10 +18,22 @@ struct Order: Codable {
     var order: Int?
     var car_no: String?
     var car_type: String?
+    var total: Double?
+    var car_model: Int?
+    var car_model_title: String?
+    var car_model_title_ru: String?
+    var is_booked: Bool?
+    var washer_count: Int?
+    var services: [Service]?
     
     func getTitle() -> String {
         let lang = AppLanguage.currentAppleLanguage()
         return lang == "ru" ? (service_title_ru ?? "") : (service_title ?? "")
+    }
+    
+    func getCarModel() -> String {
+        let lang = AppLanguage.currentAppleLanguage()
+        return lang == "ru" ? (car_model_title_ru ?? "") : (car_model_title ?? "")
     }
     
 }

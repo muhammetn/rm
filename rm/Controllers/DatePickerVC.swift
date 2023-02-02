@@ -54,7 +54,7 @@ class DatePickerVC: UIViewController {
                 return
             }
             guard let date = self.viewModel?.selectedDate else {
-                self.presentErrorAlert(title: "warning", msg: "please select date!")
+                self.presentErrorAlert(title: "warning".localized(), msg: "please select date!".localized())
                 return
             }
             let today = Date().toString(dateFormat: "HH:mm")
@@ -63,7 +63,7 @@ class DatePickerVC: UIViewController {
             let timeDate = time.toDate()
             let timeEqual = todayDate.time <= timeDate.time
             if !timeEqual && (self.viewModel?.selectedIndex ?? 0) == 0 {
-                self.presentErrorAlert(title: "warning", msg: "please select correct!")
+                self.presentErrorAlert(title: "warning".localized(), msg: "please select correct!".localized())
                 return
             }
             self.viewModel?.createOrder(date: "\(date) \(time)")

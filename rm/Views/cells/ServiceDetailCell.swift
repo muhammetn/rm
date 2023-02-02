@@ -28,9 +28,11 @@ class ServiceDetailCell: UITableViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .S1Semibold)
         lb.textColor = .white
-        lb.text = "Сервисы"
+        lb.text = "Сервисы".localized()
         return lb
     }()
+    
+    var order = Order()
     
     var services: [Service]? {
         didSet {
@@ -50,6 +52,11 @@ class ServiceDetailCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cardView.layer.cornerRadius = 4
+    }
+    
     private func setupViews() {
         contentView.backgroundColor = .backgroundColor
         contentView.addSubview(cardView)
@@ -67,7 +74,6 @@ class ServiceDetailCell: UITableViewCell {
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            cardView.heightAnchor.constraint(equalToConstant: 200),
             
             titleLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             titleLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: 15),
@@ -87,13 +93,20 @@ class ServiceDetailCell: UITableViewCell {
                 return v
             }()
             nameLb.text = service.getTitle()
+            priceLb.textColor = .mainColor
+            let price = (order.car_model ?? 0) == 1 ? service.price : service.price_big
+            priceLb.text = "+\(price ?? 0) TMT"
             cardView.addSubview(nameLb)
             cardView.addSubview(stroke)
+            cardView.addSubview(priceLb)
             if count == 0 {
                 NSLayoutConstraint.activate([
                     nameLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
                     nameLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -88),
                     nameLb.topAnchor.constraint(equalTo: titleLb.bottomAnchor, constant: 15),
+                    
+                    priceLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
+                    priceLb.centerYAnchor.constraint(equalTo: nameLb.centerYAnchor),
                     
                     stroke.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
                     stroke.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
@@ -106,6 +119,9 @@ class ServiceDetailCell: UITableViewCell {
                     nameLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -88),
                     nameLb.topAnchor.constraint(equalTo: lastItem.bottomAnchor, constant: 25),
                     
+                    priceLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
+                    priceLb.centerYAnchor.constraint(equalTo: nameLb.centerYAnchor),
+                    
                     stroke.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
                     stroke.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
                     stroke.topAnchor.constraint(equalTo: nameLb.bottomAnchor, constant: 10),
@@ -115,6 +131,24 @@ class ServiceDetailCell: UITableViewCell {
             lastItem = nameLb
             count += 1
         }
+        
+        let allPriceTextLb = getLb(font: .B1Regular)
+        let allPriceLb = getLb(font: .B1Regular)
+        allPriceLb.textColor = .mainColor
+        cardView.addSubview(allPriceTextLb)
+        cardView.addSubview(allPriceLb)
+        allPriceTextLb.text = "Итоги:".localized()
+        allPriceLb.text = "\(order.total ?? 0) TMT"
+        NSLayoutConstraint.activate([
+            allPriceTextLb.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
+            allPriceTextLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -88),
+            allPriceTextLb.topAnchor.constraint(equalTo: lastItem.bottomAnchor, constant: 25),
+            
+            allPriceTextLb.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -15),
+            
+            allPriceLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
+            allPriceLb.centerYAnchor.constraint(equalTo: allPriceTextLb.centerYAnchor),
+        ])
     }
     
     func getLb(font: Fonts) -> UILabel {

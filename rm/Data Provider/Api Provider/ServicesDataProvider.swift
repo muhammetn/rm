@@ -12,13 +12,8 @@ protocol ServicesDataProviderType {
     func getWasher(completion: @escaping (Result<[Washer], NetworkError>) -> Void)
     func getService(type: String, completion: @escaping (Result<[Service], NetworkError>) -> Void)
     func getServicePackage(completion: @escaping (Result<[ServicePackage], NetworkError>) -> Void)
+    func addReview(rating: Int, review: String, orderId: Int, completion: @escaping (Result<String, NetworkError>) -> ())
 }
-
-//class ServicesDataProvider {
-//    static var shared = ServicesDataProvider()
-//
-//    init() { }
-//}
 
 
 extension APIDataProvider: ServicesDataProviderType {
@@ -71,18 +66,21 @@ extension APIDataProvider: ServicesDataProviderType {
         }
     }
     
-//    func createOrder(params: [String: Any], completion: @escaping (Result<String, NetworkError>) -> Void) {
-//        let url = "/create-order-user0"
-//        APIDataProvider.shared.request(url: url, method: .put, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
-//            switch result {
-//            case .success(let success):
-//                completion(.success(success))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-    
-    
+    func addReview(rating: Int, review: String, orderId: Int, completion: @escaping (Result<String, NetworkError>) -> ()) {
+        let url = "/add-review101"
+        let params: [String: Any] = [
+            "rating": rating,
+            "review": review,
+            "order_id": orderId
+        ]
+        APIDataProvider.shared.request(url: url, method: .put, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
 }

@@ -57,7 +57,7 @@ class WasherCell: UITableViewCell {
     let statusBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Свободно", for: .normal)
+        btn.setTitle("Свободно".localized(), for: .normal)
         btn.titleLabel?.font = UIFont(font: .B1Regular)
         btn.contentEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
         btn.backgroundColor = .greenColorr
@@ -128,16 +128,17 @@ class WasherCell: UITableViewCell {
     func initData(_ washer: Washer) {
         washerLb.text = washer.getName()
         if washer.car_in_process ?? 0 == 0 {
-            queueLb.text = "нет машин в очереди"
+            queueLb.text = "нет машин в очереди".localized()
             statusBtn.backgroundColor = .greenColorr
+            statusBtn.setTitle("Свободно".localized(), for: .normal)
             statusBtn.isEnabled = true
         } else {
-            queueLb.text = "\(washer.car_in_process ?? 1) машины в очереди"
+            let str = "машины в очереди".localized()
+            queueLb.text = "\(washer.car_in_process ?? 1) \(str)"
             statusBtn.backgroundColor = .redColorr
+            statusBtn.setTitle("Занято".localized(), for: .normal)
             statusBtn.isEnabled = false
-            
         }
-        
     }
     
 }

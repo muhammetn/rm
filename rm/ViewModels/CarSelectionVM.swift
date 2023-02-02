@@ -16,7 +16,6 @@ final class CarSelectionVM {
     
     func getCarModels() {
         isLoading.value = true
-//        APIDataProvider.shared.re
         APIDataProvider.shared.getCarModels { result in
             switch result {
             case .success(let success):

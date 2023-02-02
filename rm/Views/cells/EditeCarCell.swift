@@ -65,7 +65,7 @@ class EditeCarCell:  UITableViewCell {
         addSubview(cardView)
         cardView.addSubview(editeImageView)
         cardView.addSubview(nameLb)
-        titleLb.text = "Вы можете изменить тип машины здесь:"
+        titleLb.text = "Вы можете изменить тип машины здесь:".localized()
         nameLb.text = AuthHelper.shared.getCarName
     }
     

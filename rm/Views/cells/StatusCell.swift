@@ -155,9 +155,16 @@ class StatusCell: UITableViewCell {
     
     func initDate(_ order: Order) {
         carModelLb.text = "\(order.car_type ?? "") • \(order.car_no ?? "")"
-        titleLB.text = order.getTitle()
-        descLb.text = "service type: \(order.service_type ?? "")"
-        statusBtn.setTitle("\(order.status ?? "pending")", for: .normal)
+        if order.getTitle() == "CUSTOM" {
+            titleLB.text = order.getTitle().localized()
+        } else {
+            titleLB.text = order.getTitle()
+        }
+        let orderStr = "очереди".localized()
+        let descStr = "Перед вами".localized()
+        descLb.text = "\(descStr) \(order.order ?? 0) \(orderStr)"
+        statusBtn.setTitle("\(order.status ?? "pending")".localized(), for: .normal)
+        statusBtn.backgroundColor = .mainColor
         switch order.status ?? "pending" {
         case "pending":
             statusImg.image = UIImage(named: "status_indicator-1")

@@ -8,6 +8,7 @@ target 'rm' do
   pod 'Alamofire'
   pod 'OTPFieldView'
   pod 'SDWebImage', '~> 5.0'
-  pod 'SQLite.swift', '~> 0.12.0'
+  #pod 'SQLite.swift', '~> 0.12.0'
+  pod 'Cosmos', '~> 23.0'
 
 end

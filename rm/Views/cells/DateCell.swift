@@ -83,7 +83,7 @@ class DateCell: UICollectionViewCell {
     }
     
     func initDate(day: String, month: String, dayName: String) {
-        dayLb.text = dayName
+        dayLb.text = dayName.localized()
         dateLb.text = "\(day) \(month)"
     }
     

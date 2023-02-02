@@ -25,9 +25,9 @@ final class ServicesDetailVM {
         let group = DispatchGroup()
         group.enter()
         group.enter()
-        
         isLoading.value = true
         APIDataProvider.shared.getServicePackage { result in
+            print(result)
             switch result {
             case .success(let success):
 //                self.isLoading.value = false
@@ -40,6 +40,7 @@ final class ServicesDetailVM {
         }
         
         APIDataProvider.shared.getService(type: "normal") { result in
+            print(result)
             switch result {
             case .success(let success):
                 self.services.value = success

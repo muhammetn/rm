@@ -10,8 +10,15 @@ import UIKit
 class StatusDetailVC: UIViewController {
     
     let mainView = StatusDetailView()
-    let service = Service(service_id: 0, title: "dsads", title_ru: "Dsad", price: 213, price_big: 341, description: "sdas", description_ru: "dsa", duration: 232, min_washer: 3)
-    lazy var services = [service, service]
+    var viewModel: StatusDetailVM?
+    lazy var loadingView = LoadingView()
+    lazy var networkErrorView = NetworkErrorView()
+    
+    convenience init(_ order_id: Int) {
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = StatusDetailVM(orderId: order_id)
+    }
+    
     override func loadView() {
         super.loadView()
         view = mainView
@@ -20,14 +27,53 @@ class StatusDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bindViewModel()
     }
     
     private func setupUI() {
-        title = "Полная информация"
+        title = "Полная информация".localized()
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.navigationBar.prefersLargeTitles = true
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+    }
+    
+    private func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        viewModel.isLoading.bind { [weak self] isEnabled in
+            guard let self = self else { return }
+            if isEnabled {
+                self.view.addSubview(self.loadingView)
+                self.loadingView.frame = self.view.bounds
+            }
+        }
+        
+        viewModel.didFinishWithError.bind { [weak self] error in
+            guard let self = self, let error = error else { return }
+            print("error \(error.customDescription)")
+            self.loadingView.removeFromSuperview()
+            switch error {
+            case .noInternet:
+                self.networkErrorView.isHidden = false
+                self.view = self.networkErrorView
+            default:
+                self.presentErrorAlert(msg: error.customDescription)
+            }
+        }
+        viewModel.didFinish.bind { [weak self] order in
+            guard let self = self else { return }
+            self.view = self.mainView
+            self.loadingView.removeFromSuperview()
+            viewModel.orderDetail = order
+            self.mainView.tableView.reloadData()
+        }
+        viewModel.getStatusDetail()
+    }
+    
+    func clickAddReview() {
+        guard let orderId = viewModel?.orderId else { return }
+        let vc = Helper.getAlert(AddReviewVC(orderId: orderId))
+        present(vc, animated: true)
     }
     
 }
@@ -40,7 +86,10 @@ extension StatusDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        guard let _ = viewModel?.orderDetail else {
+            return 0
+        }
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -48,17 +97,20 @@ extension StatusDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let order = viewModel?.orderDetail else { return UITableViewCell() }
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: StatusDetailCell.identifier, for: indexPath) as! StatusDetailCell
+            cell.initData(order: order)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailCell.identifier, for: indexPath) as! CarDetailCell
+            cell.initData(order: order)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: ServiceDetailCell.identifier, for: indexPath) as! ServiceDetailCell
-            cell.services = services
-            cell.backgroundColor = .redColorr
+            cell.order = order
+            cell.services = order.services
             return cell
         }
     }
@@ -68,8 +120,15 @@ extension StatusDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let order = viewModel?.orderDetail else { return nil}
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: FooterReviewView.identifier) as! FooterReviewView
-//        footer.backgroundColor = .gray
+        if (order.status ?? "") == "completed" {
+            footer.addReviewView.backgroundColor = .mainColor
+            footer.clickCallback = { [weak self] in
+                self?.clickAddReview()
+            }
+        }
         return footer
     }
+    
 }

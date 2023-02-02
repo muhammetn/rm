@@ -42,7 +42,7 @@ class PackageServiceInfoCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .S1Regular)
-        lb.text = "40 минут"
+//        lb.text = "40 минут"
         lb.textColor = .white
         return lb
     }()
@@ -51,7 +51,7 @@ class PackageServiceInfoCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .S1Regular)
-        lb.text = "Минимум 1 мойщик"
+//        lb.text = "Минимум 1 мойщик"
         lb.textColor = .white
         return lb
     }()
@@ -69,7 +69,7 @@ class PackageServiceInfoCell: UITableViewCell {
         lb.font = UIFont(font: .B1Regular)
         lb.textColor = .white
         lb.numberOfLines = 0
-        lb.text = "Это VIP сервис, без очереди на мойку, не нужно выбирать время"
+        lb.text = "Это VIP сервис, без очереди на мойку, не нужно выбирать время".localized()
         return lb
     }()
     
@@ -150,7 +150,6 @@ class PackageServiceInfoCell: UITableViewCell {
         
     }
     
-    
     func activateIconBottom() {
         strokeBottomConstraints.isActive = false
         iconBottomConstraints.isActive = true
@@ -159,7 +158,6 @@ class PackageServiceInfoCell: UITableViewCell {
         stroke1View.isHidden = true
         stroke2View.isHidden = true
         vipLb.isHidden = true
-        
     }
     
     func activateStrokeBottom() {

@@ -85,9 +85,9 @@ class VIPServicesListCell: UITableViewCell {
         cardView.addSubview(descLb)
         cardView.addSubview(lineView)
         cardView.addSubview(priceLb)
-        titleLb.text = "VIP - Експресс"
-        descLb.text = "Услуга без очереди и два мойшики. Время примерно 30минут"
-        priceLb.text = ""
+//        titleLb.text = "VIP - Експресс"
+//        descLb.text = "Услуга без очереди и два мойшики. Время примерно 30минут"
+//        priceLb.text = ""
     }
     
     private func setupConstraints() {
@@ -123,7 +123,7 @@ class VIPServicesListCell: UITableViewCell {
     }
     
     func initData(_ service: Service) {
-        priceLb.text = "\(service.price ?? 0) TMT"
+        priceLb.text = "\(service.getPrice()) TMT"
         descLb.text = service.getDesc()
         titleLb.text = service.getTitle()
         

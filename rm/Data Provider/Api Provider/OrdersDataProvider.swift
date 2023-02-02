@@ -8,9 +8,12 @@
 import Foundation
 
 protocol OrdersDataProviderType {
-    func createOrder(services: String, package: Int, car_model: Int, car_no: String, car_type: String, is_booked: Bool, book_time: String, washer_id: Int, washer_count: Int, completion: @escaping(Result<String, NetworkError>) -> ())
     
+    func createOrder(services: String, package: Int, car_model: Int, car_no: String, car_type: String, is_booked: Bool, book_time: String, washer_id: Int, washer_count: Int, completion: @escaping(Result<String, NetworkError>) -> ())
     func getOrders(page: Int, completion: @escaping(Result<[Order], NetworkError>) -> ())
+    
+    func getOrderDetail(order_id: Int, completion: @escaping(Result<Order, NetworkError>) -> ())
+    
 }
 
 
@@ -51,5 +54,17 @@ extension APIDataProvider: OrdersDataProviderType {
         }
     }
     
+    
+    func getOrderDetail(order_id: Int, completion: @escaping (Result<Order, NetworkError>) -> ()) {
+        let url = "/get-user-order?order_id=\(order_id)"
+        APIDataProvider.shared.request(url: url, withAuth: true) { (result: Result<Order, NetworkError>) in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
 }

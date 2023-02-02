@@ -54,7 +54,7 @@ class NetworkErrorView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .mainColor
         btn.titleLabel?.textAlignment = .center
-        btn.setTitle("Повторить попытку", for: .normal)
+        btn.setTitle("Повторить попытку".localized(), for: .normal)
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.cardColor, for: .normal)
         return btn
@@ -83,7 +83,7 @@ class NetworkErrorView: UIView {
         stackView.addArrangedSubview(titleLb)
         stackView.addArrangedSubview(descLb)
         
-        titleLb.text = "Отсутствует интернет-соединение. "
+        titleLb.text = "Отсутствует интернет-соединение. ".localized()
         
         descLb.text = "Проверьте подключение к WI-FI или сотовой сети и повторите попытку."
         

@@ -87,7 +87,7 @@ class ServiceCell: UITableViewCell {
     
     func initData(_ servicePackage: ServicePackage) {
         titleLb.text = servicePackage.getTitle()
-        priceLb.text = "\(servicePackage.price ?? 0) TMT"
+        priceLb.text = "\(servicePackage.getPrice()) TMT"
     }
     
 }

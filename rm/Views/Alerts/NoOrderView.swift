@@ -54,7 +54,7 @@ class NoOrderView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .mainColor
         btn.titleLabel?.textAlignment = .center
-        btn.setTitle("Начать", for: .normal)
+        btn.setTitle("Начать".localized(), for: .normal)
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.cardColor, for: .normal)
         return btn
@@ -82,8 +82,8 @@ class NoOrderView: UIView {
         stackView.addArrangedSubview(titleLb)
         stackView.addArrangedSubview(descLb)
         
-        titleLb.text = "У вас пока нет заказов. "
-        descLb.text = "Выберите тип машины и услуги"
+        titleLb.text = "У вас пока нет заказов.".localized()
+        descLb.text = "Выберите тип машины и услуги".localized()
         
         button.addTarget(self, action: #selector(clickBtn), for: .touchUpInside)
     }

@@ -11,6 +11,7 @@ class VIPPackageServiceVC: UIViewController {
     
     var carModel = String()
     var carNumber = String()
+    var service = Service()
     
     let mainView = VIPPackageServiceView()
     var viewModel: VIPPackageServiceVM?
@@ -43,7 +44,9 @@ class VIPPackageServiceVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "Полная мойка (кузов, салон)"
+        title = viewModel?.service.getTitle()
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
         extendedLayoutIncludesOpaqueBars = true
         hideKeyboardWhenTappedAround()
         mainView.tableView.dataSource = self
@@ -73,11 +76,12 @@ class VIPPackageServiceVC: UIViewController {
         viewModel?.didFinish.bind({ [weak self] value in
             guard let self = self else { return }
             if value {
-                print("success")
                 self.loadingView.removeFromSuperview()
                 let vc = Helper.getAlert(SuccessVC())
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.present(vc, animated: true)
+                    self.present(vc, animated: true) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
             }
         })
@@ -85,11 +89,11 @@ class VIPPackageServiceVC: UIViewController {
     
     @objc func clickFooter() {
         if carModel == "" {
-            presentErrorAlert(title: "warning", msg: "please enter car model!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car model!".localized())
             return
         }
         if carNumber == "" {
-            presentErrorAlert(title: "warning", msg: "please enter car number!")
+            presentErrorAlert(title: "warning".localized(), msg: "please enter car number!".localized())
             return
         }
         viewModel?.createOrder(carNo: carNumber, carType: carModel)
@@ -124,12 +128,18 @@ extension VIPPackageServiceVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let viewModel = viewModel else {
+            return UITableViewCell()
+        }
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: PackageServiceInfoCell.identifier, for: indexPath) as! PackageServiceInfoCell
             cell.activateStrokeBottom()
-            cell.title1Lb.text = "\(viewModel?.service.duration ?? 0) минут"
-            cell.title2Lb.text = "Минимум \(viewModel?.service.min_washer ?? 0) мойщик"
+            let miniStr = "Минимум".localized()
+            let washerStr = "мойщик".localized()
+            let minStr = "минут".localized()
+            cell.title1Lb.text = "\(viewModel.service.duration ?? 0) \(minStr)"
+            cell.title2Lb.text = "\(miniStr) \(viewModel.service.min_washer ?? 0) \(washerStr)"
             cell.selectionStyle = .none
             return cell
         default:

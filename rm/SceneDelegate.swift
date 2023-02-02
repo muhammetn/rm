@@ -20,13 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.overrideUserInterfaceStyle = .light
         setNavBar()
-//        var vc = UIViewController()
-//        if AuthHelper.shared.auth {
-//            vc = UINavigationController(rootViewController: CarSelectionVC())
-//        } else {
-//            vc = UINavigationController(rootViewController: LoginVC())
-//        }
-        let vc = TabBarController()
+        var vc = UIViewController()
+        if AuthHelper.shared.auth {
+            vc = UINavigationController(rootViewController: CarSelectionVC())
+        } else {
+            vc = UINavigationController(rootViewController: LoginVC())
+        }
+//        let vc = TabBarController()
 //        let vc = UINavigationController(rootViewController: StatusVC())
         window?.rootViewController = vc
         window?.makeKeyAndVisible()

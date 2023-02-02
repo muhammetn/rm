@@ -13,6 +13,12 @@ class NamingVC: UIViewController {
     var viewModel = NamingVM()
     lazy var loadingView = LoadingView()
     lazy var networkErrorView = NetworkErrorView()
+    var action: VerificationAction = .sign
+    
+    convenience init(action: VerificationAction) {
+        self.init(nibName: nil, bundle: nil)
+        self.action = action
+    }
     
     override func loadView() {
         super.loadView()
@@ -60,10 +66,16 @@ class NamingVC: UIViewController {
         viewModel.didFinish.bind { [weak self] success in
             guard let self = self else { return }
             self.loadingView.removeFromSuperview()
-            print("success")
-            if success {
+            if self.action == .sign && success {
                 let vc = CarSelectionVC()
                 self.show(vc, sender: self)
+            } else if success {
+                guard let vc = Helper.getAlert(SuccessVC()) as? SuccessVC else { return }
+                vc.mainView.titleLb.text = "Ваша имя успешно изменен".localized()
+                vc.mainView.descLb.text = ""
+                self.present(vc, animated: true) {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }
@@ -81,8 +93,8 @@ class NamingVC: UIViewController {
     }
     
     @objc func clickConfirm() {
-        if (mainView.nameField.text?.count ?? 0) < 5 {
-            presentErrorAlert(title: "Alert", msg: "please enter more symbols")
+        if (mainView.nameField.text?.count ?? 0) < 4 {
+            presentErrorAlert(title: "warning".localized(), msg: "please enter more symbols".localized())
             return
         }
         viewModel.setUsername(username: mainView.nameField.text ?? "")

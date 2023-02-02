@@ -23,7 +23,7 @@ class FormsCell: UITableViewCell {
     let titleLb: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.text = "Заполнитe бланки"
+        lb.text = "Заполнитe бланки".localized()
         lb.textColor = .white
         lb.font = UIFont(font: .S1Semibold)
         return lb
@@ -36,7 +36,7 @@ class FormsCell: UITableViewCell {
         field.backgroundColor = .cardColor
         field.font = UIFont(font: .B1Regular)
         field.attributedPlaceholder = NSAttributedString(
-            string: "Модел машин. Например: Tayota Camry",
+            string: "Модел машин. Например: Tayota Camry".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor]
         )
         field.textColor = .white
@@ -50,7 +50,7 @@ class FormsCell: UITableViewCell {
         field.backgroundColor = .cardColor
         field.font = UIFont(font: .B1Regular)
         field.attributedPlaceholder = NSAttributedString(
-            string: "Номер машин. Например: AY 8512",
+            string: "Номер машин. Например: AY 8512".localized(),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.passiveTextColor]
         )
         field.textColor = .white

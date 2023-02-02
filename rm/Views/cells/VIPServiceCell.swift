@@ -66,7 +66,7 @@ class VIPServiceCell:  UITableViewCell {
         cardView.addSubview(vipImg)
         cardView.addSubview(titleLb)
         cardView.addSubview(arrowImg)
-        titleLb.text = "Все VIP категория"
+        titleLb.text = "Все VIP категория".localized()
     }
     
     private func setupConstraints() {
@@ -89,7 +89,6 @@ class VIPServiceCell:  UITableViewCell {
             arrowImg.heightAnchor.constraint(equalToConstant: 24 * KeyWords.widthRatio),
             arrowImg.widthAnchor.constraint(equalToConstant: 24 * KeyWords.widthRatio),
             
-//            titleLb.trailingAnchor.cons
         ])
     }
     

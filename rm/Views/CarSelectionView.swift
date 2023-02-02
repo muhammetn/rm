@@ -50,7 +50,7 @@ class CarSelectionView: UIView {
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.isEnabled = false
-        btn.setTitle("Dowam et", for: .normal)
+        btn.setTitle("Dowam et".localized(), for: .normal)
         return btn
     }()
     
@@ -75,8 +75,8 @@ class CarSelectionView: UIView {
         addSubview(descLb)
         addSubview(collectionView)
         addSubview(confirmBtn)
-        titleLb.text = "Выберите тип машина"
-        descLb.text = "Цены могут меняться в зависимости от выбранного вами типа"
+        titleLb.text = "Выберите тип машина".localized()
+        descLb.text = "Цены могут меняться в зависимости от выбранного вами типа".localized()
     }
     
     private func setupConstraints() {

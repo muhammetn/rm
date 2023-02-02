@@ -9,6 +9,8 @@ import UIKit
 
 class LoginView: UIView {
     
+    var checkCallback: (()->())?
+    
     var scrollView: UIScrollView = {
         let v = UIScrollView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +98,7 @@ class LoginView: UIView {
         btn.titleLabel?.font = UIFont(font: .S1Semibold)
         btn.setTitleColor(.backgroundColor, for: .normal)
         btn.titleLabel?.textAlignment = .center
-        btn.setTitle("Dowam et", for: .normal)
+        btn.setTitle("Dowam et".localized(), for: .normal)
         return btn
     }()
     
@@ -106,6 +108,14 @@ class LoginView: UIView {
         img.image = UIImage(named: "logoWithTitle")
         img.contentMode = .scaleAspectFit
         return img
+    }()
+    
+    let hiddenCheckBtn: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.isSelected = false
+        btn.backgroundColor = .clear
+        return btn
     }()
     
     override init(frame: CGRect) {
@@ -137,14 +147,15 @@ class LoginView: UIView {
         stackView.addArrangedSubview(checkImg)
         stackView.addArrangedSubview(usageDescLb)
         cardView.addSubview(confirmBtn)
-        usageDescLb.text = "Ulanyş kadalaryny okadym we razy"
-        descLb.text = "Ulgama girmek üçin telefon beligiňiz giriziň"
+        cardView.addSubview(hiddenCheckBtn)
+        hiddenCheckBtn.addTarget(self, action: #selector(clickCheck), for: .touchUpInside)
+        usageDescLb.text = "Ulanyş kadalaryny okadym we razy".localized()
+        descLb.text = "Ulgama girmek üçin telefon beligiňiz giriziň".localized()
         
     }
     
     private func setupConstraints() {
         let layoutGuide = scrollView.contentLayoutGuide
-        
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -189,7 +200,18 @@ class LoginView: UIView {
             
             bottomLogoImg.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             bottomLogoImg.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            hiddenCheckBtn.leadingAnchor.constraint(equalTo: checkImg.leadingAnchor),
+            hiddenCheckBtn.trailingAnchor.constraint(equalTo: usageDescLb.trailingAnchor),
+            hiddenCheckBtn.topAnchor.constraint(equalTo: checkImg.topAnchor),
+            hiddenCheckBtn.bottomAnchor.constraint(equalTo: checkImg.bottomAnchor),
+            
         ])
+    }
+    
+    @objc func clickCheck() {
+        hiddenCheckBtn.isSelected = !hiddenCheckBtn.isSelected
+        checkCallback?()
     }
     
 }
