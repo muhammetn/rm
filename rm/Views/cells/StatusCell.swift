@@ -114,7 +114,6 @@ class StatusCell: UITableViewCell {
             
             cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            cardView.heightAnchor.constraint(equalToConstant: 200),
             cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
@@ -164,6 +163,7 @@ class StatusCell: UITableViewCell {
         let descStr = "Перед вами".localized()
         descLb.text = "\(descStr) \(order.order ?? 0) \(orderStr)"
         statusBtn.setTitle("\(order.status ?? "pending")".localized(), for: .normal)
+        statusBtn.setTitleColor(.backgroundColor, for: .normal)
         statusBtn.backgroundColor = .mainColor
         switch order.status ?? "pending" {
         case "pending":

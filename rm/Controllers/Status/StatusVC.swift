@@ -22,13 +22,13 @@ class StatusVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.orders.removeAll()
-        viewModel?.doneOrders.removeAll()
-        viewModel?.onProcess.removeAll()
-        mainView.tableView.reloadData()
-        viewModel?.load = true
-        page = 1
-        viewModel?.getOrders(page: self.page)
+//        viewModel?.orders.removeAll()
+//        viewModel?.doneOrders.removeAll()
+//        viewModel?.onProcess.removeAll()
+//        mainView.tableView.reloadData()
+//        viewModel?.load = true
+//        page = 1
+//        viewModel?.getOrders(page: self.page)
     }
     
     override func viewDidLoad() {
@@ -97,6 +97,8 @@ class StatusVC: UIViewController {
                 }
             })
         }
+        
+        viewModel.getOrders(page: self.page)
     }
     
 }

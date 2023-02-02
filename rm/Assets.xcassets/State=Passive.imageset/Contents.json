@@ -19,7 +19,6 @@
     "version" : 1
   },
   "properties" : {
-    "compression-type" : "lossy",
     "preserves-vector-representation" : true
   }
 }

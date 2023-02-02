@@ -15,57 +15,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "request(url:method:params:withAuth:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "375EB57E-4122-4828-8EAB-5414686B91A7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "rm/Data Provider/Api Provider/API.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "request(url:method:params:withAuth:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "375EB57E-4122-4828-8EAB-5414686B91A7 - ce8bd0b1598a152b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static rm.API.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable, &#x3c4;_0_0: Swift.Encodable&gt;(url: Swift.String, method: Alamofire.HTTPMethod, params: Swift.Dictionary&lt;Swift.String, Any&gt;, withAuth: Swift.Bool, completion: (Swift.Result&lt;Swift.Optional&lt;&#x3c4;_0_0&gt;, rm.NetworkError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "rm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nurchayew/Projects/rm/rm/Data%20Provider/Api%20Provider/API.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "556">
-               </Location>
-               <Location
-                  uuid = "375EB57E-4122-4828-8EAB-5414686B91A7 - ce8bd0b1598a152b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static rm.API.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable, &#x3c4;_0_0: Swift.Encodable&gt;(url: Swift.String, method: Alamofire.HTTPMethod, params: Swift.Dictionary&lt;Swift.String, Any&gt;, withAuth: Swift.Bool, completion: (Swift.Result&lt;Swift.Optional&lt;&#x3c4;_0_0&gt;, rm.NetworkError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "rm"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nurchayew/Projects/rm/rm/Data%20Provider/Api%20Provider/API.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "960">
-               </Location>
-            </Locations>
+            endingLineNumber = "72">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

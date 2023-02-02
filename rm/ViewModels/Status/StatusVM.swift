@@ -12,6 +12,7 @@ final class StatusVM {
     var isLoading: Binder<Bool> = Binder(false)
     var didFinish: Binder<[Order]?> = Binder(nil)
     var didFinishWithError: Binder<NetworkError?> = Binder(nil)
+    
     var doneOrders: [Order] = []
     var onProcess: [Order] = []
     var orders = [Order]()

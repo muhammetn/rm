@@ -90,8 +90,6 @@ class WasherCell: UITableViewCell {
         cardView.addSubview(statusBtn)
         cardView.addSubview(washerLb)
         cardView.addSubview(queueLb)
-        washerLb.text = "Мойщик #2"
-        queueLb.text = "нет машин в очереди"
     }
     
     private func setupConstraints() {
