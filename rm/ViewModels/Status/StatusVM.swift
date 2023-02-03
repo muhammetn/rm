@@ -20,7 +20,9 @@ final class StatusVM {
     
     func getOrders(page: Int) {
         if !load { return }
-        isLoading.value = true
+        if page != 1 {
+            isLoading.value = true
+        }
         APIDataProvider.shared.getOrders(page: page) { results in
             switch results {
             case .success(let orders):

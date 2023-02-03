@@ -304,12 +304,15 @@ class StatusDetailCell: UITableViewCell {
     }
     
     func initData(order: Order) {
-        let date = (order.created_at ?? "").prefix(10)
-//        let time = order.created_at ?? ""
+        /// `Get Time's HH:mm`
+        let createdAt = order.created_at ?? ""
+        let time = createdAt[11..<16].toDate(format: "HH:mm").toString(dateFormat: "HH:mm")
+        /// `Get Time's dd.MM.yyyy`
+        let date = createdAt.prefix(10)
         let dateStr = String(date).toDate(format: "yyyy-MM-dd").toString(dateFormat: "dd.MM.yyyy")
         let washer = "человек".localized()
         priceLb.text = "\(order.total ?? 0) TMT"
-        timeLb.text = "\(dateStr)"
+        timeLb.text = "\(dateStr) | \(time)"
         personLb.text = "\(order.washer_count ?? 0) \(washer)"
         carLb.text = "\(order.getCarModel())"
         switch order.status ?? "pending" {

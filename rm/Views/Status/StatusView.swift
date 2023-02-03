@@ -17,7 +17,7 @@ class StatusView: UIView {
         tb.showsVerticalScrollIndicator = false
         tb.rowHeight  = UITableView.automaticDimension
         tb.estimatedRowHeight = 80
-        tb.sectionHeaderHeight = 30
+        tb.sectionHeaderHeight = 40
         tb.register(TitleHeader.self, forHeaderFooterViewReuseIdentifier: TitleHeader.identifier)
         tb.register(StatusCell.self, forCellReuseIdentifier: StatusCell.identifier)
         if #available(iOS 15.0, *) {
@@ -45,7 +45,7 @@ class StatusView: UIView {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }

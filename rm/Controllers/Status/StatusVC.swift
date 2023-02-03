@@ -10,6 +10,7 @@ import UIKit
 class StatusVC: UIViewController {
     
     var page: Int = 1
+    let refreshController = UIRefreshControl()
     let mainView = StatusView()
     var viewModel: StatusVM?
     lazy var loadingView = LoadingView()
@@ -22,6 +23,7 @@ class StatusVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .never
 //        viewModel?.orders.removeAll()
 //        viewModel?.doneOrders.removeAll()
 //        viewModel?.onProcess.removeAll()
@@ -38,13 +40,14 @@ class StatusVC: UIViewController {
     }
     
     private func setupUI() {
+        refreshController.tintColor = .white
+        refreshController.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        mainView.tableView.refreshControl = refreshController
         title = "Статусы".localized()
         navigationItem.backButtonTitle = ""
-        navigationItem.largeTitleDisplayMode = .always
-        extendedLayoutIncludesOpaqueBars = true
-        navigationController?.navigationBar.prefersLargeTitles = true
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        viewModel?.isLoading.value = true
         noOrderView.startCallback = { [weak self] in
             self?.tabBarController?.selectedIndex = 0
         }
@@ -62,6 +65,7 @@ class StatusVC: UIViewController {
         
         viewModel.didFinishWithError.bind { [weak self] error in
             guard let self = self, let error = error else { return }
+            self.refreshController.endRefreshing()
             print("error \(error.customDescription)")
             self.loadingView.removeFromSuperview()
             self.presentErrorAlert(msg: error.customDescription)
@@ -69,6 +73,7 @@ class StatusVC: UIViewController {
         
         viewModel.didFinish.bind { [weak self] orders in
             guard let self = self, let orders = orders else { return }
+            self.refreshController.endRefreshing()
             self.loadingView.removeFromSuperview()
             if self.page == 1 && orders.count == 0 {
                 self.view = self.noOrderView
@@ -76,31 +81,43 @@ class StatusVC: UIViewController {
                 return
             }
             self.view = self.mainView
+            let cnt1 = viewModel.onProcess.count
+            let cnt2 = viewModel.doneOrders.count
+            var doneOrders = [Order]()
+            var onProgress = [Order]()
             orders.forEach({
-                guard let viewModel = self.viewModel  else { return }
-                let cnt1 = viewModel.onProcess.count
-                let cnt2 = viewModel.doneOrders.count
                 if ($0.status ?? "") == "completed" || ($0.status ?? "") == "canceled" {
-                    viewModel.doneOrders.append($0)
+                    doneOrders.append($0)
+//                    viewModel.doneOrders.append($0)
                 } else {
-                    viewModel.onProcess.append($0)
-                }
-                if self.page == 1 {
-                    self.mainView.tableView.reloadData()
-                } else {
-                    let indexPaths1 = (cnt1 ..< viewModel.onProcess.count).map { IndexPath(row: $0, section: 0) }
-                    let indexPaths2 = (cnt2 ..< viewModel.doneOrders.count).map { IndexPath(row: $0, section: 1) }
-                    self.mainView.tableView.beginUpdates()
-                    self.mainView.tableView.insertRows(at: indexPaths1, with: .fade)
-                    self.mainView.tableView.insertRows(at: indexPaths2, with: .fade)
-                    self.mainView.tableView.endUpdates()
+                    onProgress.append($0)
+//                    viewModel.onProcess.append($0)
                 }
             })
+            if self.page == 1 {
+                viewModel.doneOrders = doneOrders
+                viewModel.onProcess = onProgress
+                self.mainView.tableView.reloadData()
+            } else {
+                let indexPaths1 = (cnt1 ..< viewModel.onProcess.count).map { IndexPath(row: $0, section: 0) }
+                let indexPaths2 = (cnt2 ..< viewModel.doneOrders.count).map { IndexPath(row: $0, section: 1) }
+                self.mainView.tableView.beginUpdates()
+                self.mainView.tableView.insertRows(at: indexPaths1, with: .fade)
+                self.mainView.tableView.insertRows(at: indexPaths2, with: .fade)
+                self.mainView.tableView.endUpdates()
+            }
         }
         
         viewModel.getOrders(page: self.page)
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        guard let viewModel = viewModel else { return }
+        page = 1
+        viewModel.load = true
+        viewModel.orders.removeAll()
+        viewModel.getOrders(page: page)
+    }
 }
 
 
