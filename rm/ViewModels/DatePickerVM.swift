@@ -65,7 +65,7 @@ final class DatePickerVM {
         let today = DateComponents(year: now.year, month: now.month, day: now.day)
         let dateToday = Calendar.current.date(from: today)!
         let todayMonth = dateToday.toString(dateFormat: "MMM")
-        let todayDay = dateToday.toString(dateFormat: "DD")
+        let todayDay = dateToday.toString(dateFormat: "dd")
         let todayDate = dateToday.toString(dateFormat: "yyyy-MM-dd")
         dayNames.append(dateToday.toString(dateFormat: "EEEE"))
         dates.append(todayDate)

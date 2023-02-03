@@ -5,7 +5,7 @@
 //  Created by Muhammet Nurchayev on 24.01.2023.
 //
 
-import Alamofire
+import Foundation
 
 protocol AuthDataProviderType {
     
@@ -25,7 +25,7 @@ extension APIDataProvider: AuthDataProviderType {
             "phone": phone
         ]
         
-        APIDataProvider.shared.request(url: url, method: .put, params: params, withAuth: withAuth) { (result: Result<String, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .PUT, params: params, withAuth: withAuth) { (result: Result<String, NetworkError>) in
             switch result {
             case .success(let success):
                 completion(.success(success))
@@ -41,7 +41,7 @@ extension APIDataProvider: AuthDataProviderType {
             "phone": phone,
             "code": code
         ]
-        APIDataProvider.shared.request(url: url, method: .post, params: params) { (result: Result<User, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .POST, params: params) { (result: Result<User, NetworkError>) in
             switch result {
             case .success(let user):
                 completion(.success(user))
@@ -56,7 +56,7 @@ extension APIDataProvider: AuthDataProviderType {
         let params: [String: Any] = [
             "username": username
         ]
-        APIDataProvider.shared.request(url: url, method: .post, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .POST, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
             switch result {
             case .success(let success):
                 completion(.success(success))
@@ -84,7 +84,7 @@ extension APIDataProvider: AuthDataProviderType {
             "phone": phone,
             "code": code
         ]
-        APIDataProvider.shared.request(url: url, method: .post, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .POST, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
             switch result {
             case .success(let success):
                 completion(.success(success))

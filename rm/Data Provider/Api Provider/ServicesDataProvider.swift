@@ -5,7 +5,7 @@
 //  Created by Muhammet Nurchayev on 24.01.2023.
 //
 
-import Alamofire
+import Foundation
 
 protocol ServicesDataProviderType {
     func getCarModels(completion: @escaping (Result<[Car], NetworkError>)->())
@@ -20,6 +20,15 @@ extension APIDataProvider: ServicesDataProviderType {
     
     func getCarModels(completion: @escaping (Result<[Car], NetworkError>) -> ()) {
         let url = "/get-car-models"
+//        APIDataProvider.shared.request(url: url, withAuth: true) { (result: Result<[Car], NetworkError>) in
+//            switch result {
+//            case .success(let cars):
+//                completion(.success(cars))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+        
         APIDataProvider.shared.request(url: url, withAuth: true) { (result: Result<[Car], NetworkError>) in
             switch result {
             case .success(let cars):
@@ -73,7 +82,7 @@ extension APIDataProvider: ServicesDataProviderType {
             "review": review,
             "order_id": orderId
         ]
-        APIDataProvider.shared.request(url: url, method: .put, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .PUT, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
             switch result {
             case .success(let success):
                 completion(.success(success))

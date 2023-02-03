@@ -75,8 +75,8 @@ class DateCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20 * KeyWords.widthRatio),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20 * KeyWords.widthRatio),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16 * KeyWords.widthRatio),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16 * KeyWords.widthRatio),
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
         ])

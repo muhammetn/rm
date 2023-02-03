@@ -34,6 +34,7 @@ class CarSelectionView: UIView {
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width-32, height: 224 * KeyWords.widthRatio)
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.showsVerticalScrollIndicator = false
         v.backgroundColor = .backgroundColor
         v.allowsSelection = true
         v.allowsMultipleSelection = false

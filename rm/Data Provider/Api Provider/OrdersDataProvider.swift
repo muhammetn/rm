@@ -32,7 +32,7 @@ extension APIDataProvider: OrdersDataProviderType {
             "washer_id": washer_id,
             "washer_count": washer_count
         ]
-        APIDataProvider.shared.request(url: url, method: .put, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
+        APIDataProvider.shared.request(url: url, method: .PUT, params: params, withAuth: true) { (result: Result<String, NetworkError>) in
             switch result {
             case .success(let success):
                 completion(.success(success))
