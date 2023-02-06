@@ -20,8 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             window = UIWindow()
             window?.tintColor = .mainColor
-            let vc = TabBarController()
-//            let vc = UINavigationController(rootViewController: SelectedServicesListVC())
+            var vc = UIViewController()
+            if AuthHelper.shared.auth {
+                vc = UINavigationController(rootViewController: CarSelectionVC())
+            } else {
+                vc = UINavigationController(rootViewController: LoginVC())
+            }
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }

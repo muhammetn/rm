@@ -31,6 +31,7 @@ class APIDataProvider {
     
     let BASE_URL = "http://rm-hyzmatlary.com/api"
     
+//    MARK: -Alamofire request
 //    public func request<Model: Codable>(url: String, method: HTTPMethod = .get, params: [String: Any]? = nil, withAuth: Bool = false, completion: @escaping(Result<Model, NetworkError>) -> ()) {
 //
 //        if !isConnectedToInternet() {
@@ -66,12 +67,14 @@ class APIDataProvider {
 //            }
 //        }
 //    }
-    
+
+
+//    MARK: -Check Internet is connected
 //    func isConnectedToInternet() -> Bool {
 //        return NetworkReachabilityManager()?.isReachable ?? false
 //    }
     
-    public func request<Model: Codable>(url: String, method: Methods = .GET, params: [String: Any]? = nil, withAuth: Bool = false, completion: @escaping(Result<Model, NetworkError>)->()) {
+    func request<Model: Codable>(url: String, method: Methods = .GET, params: [String: Any]? = nil, withAuth: Bool = false, completion: @escaping(Result<Model, NetworkError>)->()) {
         
         guard let url = URL(string: "\(BASE_URL)\(url)") else {
             return completion(.failure(.involidUrl))

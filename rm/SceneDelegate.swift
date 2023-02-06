@@ -26,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             vc = UINavigationController(rootViewController: LoginVC())
         }
-//        let vc = TabBarController()
-//        let vc = UINavigationController(rootViewController: StatusVC())
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
     }
