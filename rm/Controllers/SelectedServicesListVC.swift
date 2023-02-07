@@ -29,6 +29,12 @@ class SelectedServicesListVC: UIViewController {
         view = mainView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -40,7 +46,6 @@ class SelectedServicesListVC: UIViewController {
         let serviceStr = "услуги".localized()
         title = "\(selectedStr) (\(viewModel?.services.count ?? 0) \(serviceStr))"
         extendedLayoutIncludesOpaqueBars = true
-        navigationController?.navigationBar.prefersLargeTitles = true
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }

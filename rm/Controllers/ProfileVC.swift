@@ -35,19 +35,22 @@ class ProfileVC: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         extendedLayoutIncludesOpaqueBars = true
         navigationController?.navigationBar.prefersLargeTitles = true
-        
         navigationController?.navigationItem.backButtonTitle = ""
         
         mainView.nameCallback = { [weak self] in
             guard let self = self else { return }
             let vc = NamingVC(action: .changePhone)
-            self.show(vc, sender: self)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.show(vc, sender: self)
         }
         
         mainView.phoneCallback = { [weak self] in
             guard let self = self else { return }
             let vc = ChangePhoneVC()
-            self.show(vc, sender: self)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.show(vc, sender: self)
         }
         mainView.removeAccountCallback = { [weak self] in
             guard let self = self else { return }
