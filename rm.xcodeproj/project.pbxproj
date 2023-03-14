@@ -17,6 +17,7 @@
 		3D238425298AD2E4002D438A /* ChangePhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D238424298AD2E4002D438A /* ChangePhoneView.swift */; };
 		3D238427298AEA28002D438A /* AddReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D238426298AEA28002D438A /* AddReviewView.swift */; };
 		3D23842B298AFA35002D438A /* AddReviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D23842A298AFA35002D438A /* AddReviewVM.swift */; };
+		8A020B4929C0F03800387241 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A020B4829C0F03800387241 /* UIView.swift */; };
 		8A157A7D297193C60004517F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A157A7C297193C60004517F /* AppDelegate.swift */; };
 		8A157A7F297193C60004517F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A157A7E297193C60004517F /* SceneDelegate.swift */; };
 		8A157A86297193C80004517F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A157A85297193C80004517F /* Assets.xcassets */; };
@@ -138,6 +139,7 @@
 		3D23842A298AFA35002D438A /* AddReviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewVM.swift; sourceTree = "<group>"; };
 		4AAA12AB550C4B976C5CA036 /* Pods_rm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B795C1D465DC66E02AA6350 /* Pods-rm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rm.debug.xcconfig"; path = "Target Support Files/Pods-rm/Pods-rm.debug.xcconfig"; sourceTree = "<group>"; };
+		8A020B4829C0F03800387241 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		8A157A79297193C60004517F /* rm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A157A7C297193C60004517F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A157A7E297193C60004517F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 				8A7EE37F29805C2000EFB0BA /* UIImageView.swift */,
 				8A7EE384298072D800EFB0BA /* String.swift */,
 				8AEF1595298583120002BD60 /* Date.swift */,
+				8A020B4829C0F03800387241 /* UIView.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				8A157A7F297193C60004517F /* SceneDelegate.swift in Sources */,
 				8AA7027329893AB700517DDD /* NoOrderView.swift in Sources */,
 				8AA57C6129757EFA006FD7E6 /* CustomTextField.swift in Sources */,
+				8A020B4929C0F03800387241 /* UIView.swift in Sources */,
 				8AA57C812975EF1F006FD7E6 /* CarSelectionVC.swift in Sources */,
 				8A6280BB2976DAEE00F074B4 /* ServicesDetailView.swift in Sources */,
 				8A6280E229782F8000F074B4 /* RemoveAlertVC.swift in Sources */,

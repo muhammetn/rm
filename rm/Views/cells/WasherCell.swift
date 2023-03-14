@@ -42,6 +42,7 @@ class WasherCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .H2)
+        lb.numberOfLines = 0
         lb.textColor = .white
         return lb
     }()
@@ -51,6 +52,7 @@ class WasherCell: UITableViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(font: .S1Regular)
         lb.textColor = .white
+        lb.numberOfLines = 0
         return lb
     }()
     
@@ -77,6 +79,11 @@ class WasherCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        statusBtn.setTitle("Свободно".localized(), for: .normal)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         statusBtn.layer.cornerRadius = 4
@@ -97,7 +104,8 @@ class WasherCell: UITableViewCell {
             cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
             cardView.topAnchor.constraint(equalTo: topAnchor),
-            cardView.heightAnchor.constraint(equalToConstant: 104 * KeyWords.widthRatio),
+            cardView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+//            cardView.heightAnchor.constraint(equalToConstant: 104 * KeyWords.widthRatio),
             
             homeLeading,
             homeImg.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 16),
@@ -105,30 +113,38 @@ class WasherCell: UITableViewCell {
             homeImg.widthAnchor.constraint(equalToConstant: 30 * KeyWords.widthRatio),
             
             carImg.leadingAnchor.constraint(equalTo: homeImg.leadingAnchor),
-            carImg.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16),
+            carImg.topAnchor.constraint(equalTo: washerLb.bottomAnchor, constant: 27),
+//            carImg.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16),
             carImg.widthAnchor.constraint(equalToConstant: 24 * KeyWords.widthRatio),
-            carImg.heightAnchor.constraint(equalToConstant: 24 * KeyWords.widthRatio),
+//            carImg.heightAnchor.constraint(equalToConstant: 24 * KeyWords.widthRatio),
             
-            washerLb.centerYAnchor.constraint(equalTo: homeImg.centerYAnchor),
-            washerLb.trailingAnchor.constraint(equalTo: statusBtn.trailingAnchor, constant: -16),
+            washerLb.topAnchor.constraint(equalTo: homeImg.topAnchor, constant: 5),
+//            washerLb.widthAnchor.constraint(equalToConstant: 50),
+            washerLb.trailingAnchor.constraint(lessThanOrEqualTo: statusBtn.leadingAnchor, constant: -16),
             washerLb.leadingAnchor.constraint(equalTo: homeImg.trailingAnchor, constant: 16),
             
             queueLb.leadingAnchor.constraint(equalTo: carImg.trailingAnchor, constant: 10),
-            queueLb.centerYAnchor.constraint(equalTo: carImg.centerYAnchor),
+            queueLb.topAnchor.constraint(equalTo: carImg.topAnchor, constant: 3),
+//            queueLb.centerYAnchor.constraint(equalTo: carImg.centerYAnchor),
             queueLb.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
             
             statusBtn.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
+            statusBtn.widthAnchor.constraint(greaterThanOrEqualToConstant: 60),
+//            statusBtn.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
             statusBtn.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 16),
             
+            cardView.bottomAnchor.constraint(equalTo: queueLb.bottomAnchor, constant: 16),
         ])
     }
     
     func initData(_ washer: Washer) {
         washerLb.text = washer.getName()
+//        washerLb.text = "Test text here Test text here Test text here Test text here Test text here Test text here"
         if washer.car_in_process ?? 0 == 0 {
             queueLb.text = "нет машин в очереди".localized()
             statusBtn.backgroundColor = .greenColorr
             statusBtn.setTitle("Свободно".localized(), for: .normal)
+//            statusBtn.setTitle("СвободноСвободноСвободно", for: .normal)
             statusBtn.isEnabled = true
         } else {
             let str = "машины в очереди".localized()

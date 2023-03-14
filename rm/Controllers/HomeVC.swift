@@ -153,7 +153,8 @@ extension HomeVC: UITableViewDataSource {
         case 1:
             return 62 * KeyWords.widthRatio
         default:
-            return 104 * KeyWords.widthRatio + 10
+//            return 104 * KeyWords.widthRatio + 10
+            return UITableView.automaticDimension
         }
     }
     
