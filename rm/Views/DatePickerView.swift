@@ -175,7 +175,7 @@ class DatePickerView: UIView {
         let priceStr = "\(price) TMT"
         let allPriceStr = "Итоговая цена:".localized()
         let myString = NSMutableAttributedString(string: "\(allPriceStr) \(priceStr)", attributes: attributes)
-        myString.addAttributes(priceAttributes, range: NSRange(location: 15, length: priceStr.count))
+        myString.addAttributes(priceAttributes, range: NSRange(location: allPriceStr.count + 1, length: priceStr.count))
         priceLb.attributedText = myString
     }
     

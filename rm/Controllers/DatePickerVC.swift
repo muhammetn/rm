@@ -46,6 +46,7 @@ class DatePickerVC: UIViewController {
         mainView.dateCollectionView.delegate   = self
         mainView.dateCollectionView.dataSource = self
         let packagePrice = viewModel?.package.getPrice()
+        print(packagePrice)
         var servicesPrice = Double()
         viewModel?.services.forEach({servicesPrice += $0.getPrice()})
         mainView.initPrice(price: (packagePrice ?? 0) + servicesPrice)
